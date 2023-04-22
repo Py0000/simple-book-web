@@ -37,7 +37,8 @@ const View = () => {
             window.location.reload();
         }
         catch (err) {
-            console.log(err);
+            const errIdentifier = "[Frontend] ";
+            console.log(errIdentifier + err);
         }
     }
     
@@ -53,6 +54,7 @@ const View = () => {
                         <p>{book.year}</p>
                         <p>{book.authorId}</p>
                         <button className='deleteButton' onClick={()=>handleDelete(book.id)}>Delete</button>
+                        <button className='updateButton'><Link to={`/update/${book.id}`}>Update</Link></button>
                     </div>    
                 ))}
             </div>
