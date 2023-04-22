@@ -1,9 +1,6 @@
 
 const BACKEND_PORT_NUM = 9000;
 
-const MAIN_BACKEND_TAG = "/";
-const LIST_TAG = "/books";
-
 
 // Creates the main app
 const express = require("express");
@@ -28,13 +25,13 @@ const db = require("./database");
 
 
 // Reaching the backend server via API request (using express)
-app.get(MAIN_BACKEND_TAG, (request, response) => {
+app.get("/", (request, response) => {
     response.json("Backend Server reached");
 });
 
 
 // Retrieving all books from database
-app.get(LIST_TAG, (request, response) => {
+app.get("/books", (request, response) => {
     const query = "SELECT * FROM books";
 
     db.query(query, (error, data) => {
@@ -68,4 +65,21 @@ app.post("/books", (request, response) => {
         const addBooksSuccessMsg = "Successfully added book.";
         return response.json(addBooksSuccessMsg);
     })
+});
+
+
+// Deleting books from database
+app.delete("/books/:id", (request, response) => {
+    const id = request.params.id;
+    const query = "DELETE FROM books WHERE id = ?";
+    
+    db.query(query, [id], (error, data) => {
+        if (error) {
+            const deleteBooksErrMsg = "Error deleting book data. \n";
+            return response.json(deleteBooksErrMsg + error);
+        } 
+
+        const deleteBooksSuccessMsg = "Successfully deleted book.";
+        return response.json(deleteBooksSuccessMsg);
+    });
 });
