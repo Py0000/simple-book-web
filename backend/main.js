@@ -83,3 +83,27 @@ app.delete("/books/:id", (request, response) => {
         return response.json(deleteBooksSuccessMsg);
     });
 });
+
+
+// Updating book data in database
+app.put("/books/:id", (request, response) => {
+    const id = request.params.id;
+    const query = "UPDATE books SET `title` = ?, `publisher` = ?, `year` = ?, `authorId` = ? WHERE id = ?";
+
+    const updatedData = [
+        request.body.title, 
+        request.body.publisher, 
+        request.body.year, 
+        request.body.authorId
+    ];
+
+    db.query(query, [...updatedData, id], (error, data) => {
+        if (error) {
+            const updateBooksErrMsg = "Error updating book data. \n";
+            return response.json(updateBooksErrMsg + error);
+        } 
+
+        const updateBooksSuccessMsg = "Successfully updated book.";
+        return response.json(updateBooksSuccessMsg);
+    })
+});
