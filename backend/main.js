@@ -33,6 +33,7 @@ app.get(MAIN_BACKEND_TAG, (request, response) => {
 });
 
 
+// Retrieving all books from database
 app.get(LIST_TAG, (request, response) => {
     const query = "SELECT * FROM books";
 
@@ -47,3 +48,24 @@ app.get(LIST_TAG, (request, response) => {
 });
 
 
+// Adding new book to database
+app.post("/books", (request, response) => {
+    const query = "INSERT INTO books (`title`, `publisher`, `year`, `authorId`) VALUES (?)";
+
+    const bookInfo = [
+        request.body.title, 
+        request.body.publisher, 
+        request.body.year, 
+        request.body.authorId
+    ];
+
+    db.query(query, [bookInfo], (error, data) => {
+        if (error) {
+            const addBooksErrMsg = "Error adding book data. \n";
+            return response.json(addBooksErrMsg + error)
+        } 
+
+        const addBooksSuccessMsg = "Successfully added book.";
+        return response.json(addBooksSuccessMsg);
+    })
+});
