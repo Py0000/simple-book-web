@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 const View = () => {
-    const path = "http://localhost:9000/books";
+    
     const [books, displayBooks] = useState([]);
 
 
@@ -14,6 +14,7 @@ const View = () => {
         const getBooks = async() => {
             try {
                 // need to await as it is an async function
+                const path = "http://localhost:9000/books";
                 const result = await axios.get(path);
                 displayBooks(result.data)
             }
@@ -31,6 +32,7 @@ const View = () => {
     // Deleting book from database
     const handleDelete = async (id)=> {
         try {
+            const path = "http://localhost:9000/books/";
             await axios.delete(path + id);
             window.location.reload();
         }
