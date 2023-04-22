@@ -1,0 +1,133 @@
+.main-view {
+    text-align: center;
+}
+
+.main-view h1 {
+    text-align: center;
+    font-size: 3.5rem;
+}
+
+.book-view{
+    padding: 2rem;
+    background-color: #0e387a;
+    margin: 2rem auto;
+    width: auto;
+    max-width: 90%;
+}
+
+.add-book-button{
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid #0e387a;
+    background-color: #9fafca;
+    color: #00003f;
+    border-radius: 12px;
+    width: 200px;
+    max-width: 90%;
+}
+
+.add-book-button :visited{
+    text-decoration: none;
+    color: inherit;
+}
+
+.add-book-button :checked{
+    text-decoration: none;
+    color: inherit;
+}
+
+.add-book-button :link{
+    text-decoration: none;
+}
+
+.book-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    padding: 0.5rem;
+    margin: 1.5rem 2rem;
+    border-radius: 12px;
+    background-color: #9fafca;
+    text-align: center;
+}
+
+.book-item__description h1 {
+    font-size: 2.3rem;
+    flex: 1;
+    margin: 0 1rem;
+    color: #00003f;
+}
+
+.book-item__description p {
+    font-size: 1.15rem;
+    flex: 1;
+    margin: 4 1rem;
+    color: #00003f;
+}
+
+.book-item__year {
+    display: flex;
+    flex-direction: column;
+    width: 7.5rem;
+    height: 7.5rem;
+    border: 1px solid #ececec;
+    background-color: #0e387a;
+    color: white;
+    font-size: 2rem;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-item__delete{
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: maroon;
+    color: white;
+    border-radius: 12px;
+    width: auto;
+    max-width: 90%;
+    margin-right: 5px;
+}
+
+.book-item__update {
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: #101d6b;
+    color: white;
+    border-radius: 12px;
+    width: auto;
+    max-width: 90%;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.book-item__update :link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.book-item__update :visited{
+    color: inherit;
+    text-decoration: none;
+}
+
+
+@media (min-width: 580px) {
+    .book-item__description {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      flex: 1;
+    }
+  
+    .book-item__description h2 {
+      font-size: 1.25rem;
+    }
+}

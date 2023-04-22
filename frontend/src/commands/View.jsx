@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Card from '../components/Card';
+import './View.css';
 
 const View = () => {
     
@@ -44,21 +46,24 @@ const View = () => {
     
 
     return (
-        <div>
-            <h1>Book Application</h1>
-            <div className='booksView'>
+        <div className='main-view'>
+            <h1>Simple CRUD Book Application</h1>
+            <button className='add-book-button'><Link to="/add">Add Book</Link></button>
+            <Card className='book-view'>
                 {books.map(book => (
-                    <div className='bookElement' key={book.id}>
-                        <h2>{book.title}</h2>
-                        <p>{book.publisher}</p>
-                        <p>{book.year}</p>
-                        <p>{book.authorId}</p>
-                        <button className='deleteButton' onClick={()=>handleDelete(book.id)}>Delete</button>
-                        <button className='updateButton'><Link to={`/update/${book.id}`}>Update</Link></button>
+                    <div className='book-item' key={book.id}>
+                        <div className='book-item__year'>{book.year}</div>
+                        <div className="book-item__description">
+                            <h1>{book.title}</h1>
+                            <p>{book.publisher}</p>
+                            <p>{book.authorId}</p>
+                        </div>
+                        <button className='book-item__delete' onClick={()=>handleDelete(book.id)}>Delete</button>
+                        <button className='book-item__update'><Link to={`/update/${book.id}`}>Update</Link></button>
                     </div>    
                 ))}
-            </div>
-            <button><Link to="/add">Add Book</Link></button>
+            </Card>
+            
         </div>
     )
 }
