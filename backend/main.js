@@ -20,7 +20,7 @@ app.listen(BACKEND_PORT_NUM, () => {
     // Confirmation log message
     const listenPortSuccessMsg = `Backend setup, running on port ${BACKEND_PORT_NUM}`;
     console.log(listenPortSuccessMsg);
-})
+});
 
 
 // Create and setup database
