@@ -107,3 +107,18 @@ app.put("/books/:id", (request, response) => {
         return response.json(updateBooksSuccessMsg);
     })
 });
+
+
+// Retrieving all authors from database
+app.get("/authors", (request, response) => {
+    const query = "SELECT * FROM authors";
+
+    db.query(query, (error, data) => {
+        if (error) {
+            const retrieveAuthorsErrMsg = "Error retrieving all authors. \n";
+            return response.json(retrieveAuthorsErrMsg + error);
+        } 
+
+        return response.json(data);
+    });
+});
