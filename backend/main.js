@@ -180,7 +180,7 @@ app.put("/authors/:id", (request, response) => {
             return response.json(updateAuthorsErrMsg + error);
         } 
 
-        const updateBooksSuccessMsg = "Successfully updated author.";
+        const updateAuthorsSuccessMsg = "Successfully updated author.";
         return response.json(updateAuthorsSuccessMsg);
     })
 });
