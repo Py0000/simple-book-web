@@ -125,6 +125,9 @@ app.get("/authors", (request, response) => {
 
 
 // Adding new author to database
+// Configuration of database: Cannot add author with exact same names.
+// Hence, names of authors should be unique.
+// If user tries to add another author with names that already exist in table, no changes will be shown.
 app.post("/authors", (request, response) => {
     const query = "INSERT INTO authors (`name`, `biography`) VALUES (?)";
 

@@ -1,0 +1,10 @@
+.add-author__remark {
+    font-size: 1.15rem;
+    color: crimson;
+    font-weight: 750;
+    font-style: italic;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 1.5rem;
+}
