@@ -8,7 +8,7 @@
     color: black;
 }
 
-.book-view{
+.item-view{
     padding: 2rem;
     background-color: #0e387a;
     margin: 2rem auto;
@@ -16,7 +16,7 @@
     max-width: 90%;
 }
 
-.add-book-button{
+.add-item-button{
     font-size: 1.5rem;
     cursor: pointer;
     padding: 1rem;
@@ -28,28 +28,29 @@
     max-width: 90%;
 }
 
-.add-book-button :visited{
+.add-item-button :visited{
     text-decoration: none;
     color: inherit;
 }
 
-.add-book-button :checked{
+.add-item-button :checked{
     text-decoration: none;
     color: inherit;
 }
 
-.add-book-button :link{
+.add-item-button :link{
     text-decoration: none;
+    color: inherit;
 }
 
-.add-book-button:hover,
-.add-book-button:active {
+.add-item-button:hover,
+.add-item-button:active {
     background: #0e387a;;
     border-color: #0e387a;;
     color: whitesmoke;
   }
 
-.book-item {
+.item-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,21 +62,21 @@
     text-align: center;
 }
 
-.book-item__description h1 {
+.item-item__description h1 {
     font-size: 2.3rem;
     flex: 1;
     margin: 0 1rem;
     color: #00003f;
 }
 
-.book-item__description p {
+.item-item__description p {
     font-size: 1.15rem;
     flex: 1;
     margin: 4 1rem;
     color: #00003f;
 }
 
-.book-item__year {
+.item-item__id {
     display: flex;
     flex-direction: column;
     width: 7.5rem;
@@ -89,7 +90,7 @@
     justify-content: center;
 }
 
-.book-item__delete{
+.item-item__delete{
     font-size: 1.15rem;
     cursor: pointer;
     padding: 1rem;
@@ -102,12 +103,12 @@
     margin-right: 5px;
 }
 
-.book-item__delete:hover,
-.book-item__delete:active {
+.item-item__delete:hover,
+.item-item__delete:active {
     border-color: crimson;  
 }
 
-.book-item__update {
+.item-item__update {
     font-size: 1.15rem;
     cursor: pointer;
     padding: 1rem;
@@ -121,30 +122,66 @@
     margin-right: 15px;
 }
 
-.book-item__update :link{
+.item-item__update :link{
     text-decoration: none;
     color: inherit;
 }
 
-.book-item__update :visited{
+.item-item__update :visited{
     color: inherit;
     text-decoration: none;
 }
 
-.book-item__update:hover,
-.book-item__update:active {
+.item-item__update:hover,
+.item-item__update:active {
     border-color:deepskyblue;  
 }
 
 @media (min-width: 580px) {
-    .book-item__description {
+    .item-item__description {
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
       flex: 1;
     }
   
-    .book-item__description h2 {
+    .item-item__description h2 {
       font-size: 1.25rem;
     }
 }
+
+
+.view-others-button{
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid #0e387a;
+    background-color: #9fafca;
+    color: #00003f;
+    border-radius: 12px;
+    width: 250px;
+    max-width: 90%;
+    margin-left: 15rem;
+}
+
+.view-others-button :visited{
+    text-decoration: none;
+    color: inherit;
+}
+
+.view-others-button :checked{
+    text-decoration: none;
+    color: inherit;
+}
+
+.view-others-button :link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.view-others-button:hover,
+.view-others-button:active {
+    background: #0e387a;;
+    border-color: #0e387a;;
+    color: whitesmoke;
+  }
