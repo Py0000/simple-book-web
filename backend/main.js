@@ -68,7 +68,7 @@ app.post(BOOKS_DB_TABLE, (request, response) => {
 
         const addBooksSuccessMsg = "Successfully added book.";
         return response.json(addBooksSuccessMsg);
-    })
+    });
 });
 
 
