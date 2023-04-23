@@ -146,3 +146,19 @@ app.post("/authors", (request, response) => {
         return response.json(addAuthorsSuccessMsg);
     })
 });
+
+// Deleting authors from database
+app.delete("/authors/:id", (request, response) => {
+    const id = request.params.id;
+    const query = "DELETE FROM authors WHERE id = ?";
+    
+    db.query(query, [id], (error, data) => {
+        if (error) {
+            const deleteAuthorsErrMsg = "Error deleting author data. \n";
+            return response.json(deleteAuthorsErrMsg + error);
+        } 
+
+        const deleteAuthorsSuccessMsg = "Successfully deleted author.";
+        return response.json(deleteAuthorsSuccessMsg);
+    });
+});
