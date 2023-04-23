@@ -59,8 +59,8 @@ const ViewBook = () => {
                             <p>{book.publisher}</p>
                             <p>{book.authorId}</p>
                         </div>
-                        <button className='item-item__delete' onClick={()=>handleDelete(book.id)}>Delete</button>
                         <button className='item-item__update'><Link to={`/updatebook/${book.id}`}>Update</Link></button>
+                        <button className='item-item__delete' onClick={()=>handleDelete(book.id)}>Delete</button>  
                     </div>    
                 ))}
             </Card>
