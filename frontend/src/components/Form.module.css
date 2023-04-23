@@ -21,9 +21,10 @@ h1 {
     font: inherit;
     display: block;
     width: 100%;
+    height: 2.75rem;
     border: 1px solid #ccc;
     padding: 0.15rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .add-form__button {

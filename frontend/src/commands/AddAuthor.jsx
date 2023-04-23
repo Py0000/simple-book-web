@@ -98,8 +98,8 @@ const AddAuthor = () => {
             {error && <ErrorModal title={error.title} message={error.message} handleError={errorHandler}></ErrorModal>}
             <div className={classes.input}>
                 <h1>Add New Author</h1>
-                <input type="text" placeholder='name' onChange={handleChange} name="name"></input>
-                <input type="text" placeholder='biography' onChange={handleChange} name="biography"></input>
+                <input type="text" placeholder='Enter name here' onChange={handleChange} name="name"></input>
+                <input type="text" placeholder='Enter biography here' onChange={handleChange} name="biography"></input>
                 <FormButton type="submit" onClick={handleClick}>Add</FormButton>
             </div>
             <div className='add-author__remark'>
