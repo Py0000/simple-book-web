@@ -1,0 +1,57 @@
+.add-other__button {
+    font: inherit;
+    border: 1px solid #0e387a;
+    background-color: #9fafca;
+    color: black;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    margin-left: 39rem;
+    font-weight: 500;
+}
+
+.add-other__buttonn :link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.add-other__button :visited{
+    color: inherit;
+    text-decoration: none;
+}
+
+.add-other__button:hover,
+.add-other__button:active {
+    background: #0e387a;;
+    border-color: #0e387a;;
+    color: whitesmoke;
+}
+
+.add-back__button {
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: #101d6b;
+    color: white;
+    border-radius: 12px;
+    width: auto;
+    max-width: 90%;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.add-back__button :link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.add-back__button :visited{
+    color: inherit;
+    text-decoration: none;
+}
+
+.add-back__button:hover,
+.add-back__button:active {
+    border-color:#9fafca;  
+    background-color: #9fafca;
+}

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 import classes from '../../ui/Form.module.css';
 import FormButton from '../../ui/FormButton';
-import ErrorModal from '../../ui/ErrorModel';
+import Modal from '../../ui/Modal';
 import '../../ui/AddAuthor.css';
+import '../../ui/AddBook.css';
 
 const AddAuthor = () => {
     const path = "http://localhost:9000/authors";
@@ -17,7 +19,7 @@ const AddAuthor = () => {
 
     const [error, setError] = useState();
     
-    const nagivateToPage = useNavigate();
+    const [status, setStatus] = useState();
 
     const isValidEmpty = () => {
         let isNameEmpty = author.name.trim().length === 0;
@@ -71,11 +73,13 @@ const AddAuthor = () => {
                 } 
 
                 // Input valid, add to database
-                await axios.post(path, author);
+                let res = await axios.post(path, author);
                 
-                // Nagivate back to home page after adding
-                const homepage = "/view_authors";
-                nagivateToPage(homepage);
+                setStatus({
+                    title: "Added Author Status",
+                    message: res.data
+                });
+
             } catch (error) {
                 const errMsg = "[Frontend] Error adding data to backend. \n";
                 console.log(errMsg + error);
@@ -93,14 +97,21 @@ const AddAuthor = () => {
         setError(null);
     }
 
+    const statusHandler = () => {
+        setStatus(null);
+    }
+
     return (
         <div>
-            {error && <ErrorModal title={error.title} message={error.message} handleError={errorHandler}></ErrorModal>}
+            {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
+            {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
+            <button className='add-back__button'><Link to="/view_authors">Back</Link></button>
             <div className={classes.input}>
                 <h1>Add New Author</h1>
                 <input type="text" placeholder='Enter name here' onChange={handleChange} name="name"></input>
                 <input type="text" placeholder='Enter biography here' onChange={handleChange} name="biography"></input>
-                <FormButton type="submit" onClick={handleClick}>Add</FormButton>
+                <FormButton type="submit" onClick={handleClick}>Add Author</FormButton>
+                <button className='add-other__button'><Link to="/addbook">Save Book's Details Here</Link></button>
             </div>
             <div className='add-author__remark'>
                 <p>Note: If the author already exists in our database, you won't be able to add it in, hence no visible change will be noticed!</p>

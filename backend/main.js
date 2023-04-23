@@ -40,7 +40,7 @@ app.get(BOOKS_DB_TABLE, (request, response) => {
     db.query(query, (error, data) => {
         if (error) {
             const retrieveBooksErrMsg = "Error retrieving all books. \n";
-            return response.json(retrieveBooksErrMsg + error);
+            return response.json(retrieveBooksErrMsg);
         } 
 
         return response.json(data);
@@ -62,7 +62,7 @@ app.post(BOOKS_DB_TABLE, (request, response) => {
     db.query(query, [bookInfo], (error, data) => {
         if (error) {
             const addBooksErrMsg = "Error adding book data. \n";
-            return response.json(addBooksErrMsg + error)
+            return response.json(addBooksErrMsg)
         } 
 
         const addBooksSuccessMsg = "Successfully added book.";
@@ -79,7 +79,7 @@ app.delete(BOOKS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     db.query(query, [id], (error, data) => {
         if (error) {
             const deleteBooksErrMsg = "Error deleting book data. \n";
-            return response.json(deleteBooksErrMsg + error);
+            return response.json(deleteBooksErrMsg);
         } 
 
         const deleteBooksSuccessMsg = "Successfully deleted book.";
@@ -103,7 +103,7 @@ app.put(BOOKS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     db.query(query, [...updatedData, id], (error, data) => {
         if (error) {
             const updateBooksErrMsg = "Error updating book data. \n";
-            return response.json(updateBooksErrMsg + error);
+            return response.json(updateBooksErrMsg);
         } 
 
         const updateBooksSuccessMsg = "Successfully updated book.";
@@ -119,7 +119,7 @@ app.get(AUTHORS_DB_TABLE, (request, response) => {
     db.query(query, (error, data) => {
         if (error) {
             const retrieveAuthorsErrMsg = "Error retrieving all authors. \n";
-            return response.json(retrieveAuthorsErrMsg + error);
+            return response.json(retrieveAuthorsErrMsg);
         } 
 
         return response.json(data);
@@ -142,7 +142,7 @@ app.post(AUTHORS_DB_TABLE, (request, response) => {
     db.query(query, [authorInfo], (error, data) => {
         if (error) {
             const addAuthorsErrMsg = "Error adding author data. \n";
-            return response.json(addAuthorsErrMsg + error)
+            return response.json(addAuthorsErrMsg)
         } 
 
         const addAuthorsSuccessMsg = "Successfully added author.";
@@ -158,7 +158,7 @@ app.delete(AUTHORS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     db.query(query, [id], (error, data) => {
         if (error) {
             const deleteAuthorsErrMsg = "Error deleting author data. \n";
-            return response.json(deleteAuthorsErrMsg + error);
+            return response.json(deleteAuthorsErrMsg);
         } 
 
         const deleteAuthorsSuccessMsg = "Successfully deleted author.";
@@ -180,7 +180,7 @@ app.put(AUTHORS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     db.query(query, [...updatedData, id], (error, data) => {
         if (error) {
             const updateAuthorsErrMsg = "Error updating author data. \n";
-            return response.json(updateAuthorsErrMsg + error);
+            return response.json(updateAuthorsErrMsg);
         } 
 
         const updateAuthorsSuccessMsg = "Successfully updated author.";

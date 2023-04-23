@@ -1,11 +1,11 @@
 import Card from './Card';
 import FormButton from './FormButton';
-import classes from './ErrorModal.module.css';
+import classes from './Modal.module.css';
 
-const ErrorModal = (props) => {
+const Modal = (props) => {
     return (
         <div>
-            <div className={classes.backdrop} onClick={props.handleError}/>
+            <div className={classes.backdrop} onClick={props.handleAction}/>
             <Card className={classes.modal}>
             <header className={classes.header}>
                 <h2>{props.title}</h2>
@@ -14,11 +14,11 @@ const ErrorModal = (props) => {
                 <p>{props.message}</p>
             </div>
             <footer className={classes.actions}>
-                <FormButton onClick={props.handleError}>Ok</FormButton>
+                <FormButton onClick={props.handleAction}>Ok</FormButton>
             </footer>
             </Card>
         </div>
     );
 };
   
-  export default ErrorModal;
+  export default Modal;
