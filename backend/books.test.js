@@ -38,7 +38,7 @@ describe("Book Database Tests", () => {
             });
         });
     });    
-    
+
 
     test('Retrieving all books from test books database', async () => {
         const query = 'SELECT * FROM testbooks';
@@ -59,7 +59,7 @@ describe("Book Database Tests", () => {
         let title = "test title";
         let publisher = "test publisher";
         let year = 1000;
-        let authorId = "test authorId";
+        let authorId = "000000000000000000000000000000000000000000000"; // length 45
 
         const bookInfo = [title, publisher, year, authorId];
       
@@ -204,4 +204,55 @@ describe("Book Database Tests", () => {
         expect(selectResults[0].authorId).toBe(updatedAuthorId);
     });
     
+
+    test("Null value, should fail", async () => {
+        let title = "test title ";
+        let publisher = "test publisher ";
+        let year = null;
+        let authorId = "test authorId";
+        const bookInfo = [title, publisher, year, authorId];
+      
+        
+        try {
+            const addQuery = "INSERT INTO books (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
+            await new Promise((resolve, reject) => {
+                connection.query(addQuery, bookInfo, (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
+                });
+            });
+
+            fail("Expected an error to be thrown.");
+
+        } catch (error) {
+            expect(error.code).toBe("ER_BAD_NULL_ERROR");
+            expect(error.sqlMessage).toContain("Column 'year' cannot be null");
+        }
+    });
+
+
+    test("Exceed 45 character limit, should fail", async () => {
+        let title = "test title ";
+        let publisher = "0000000000000000000000000000000000000000000000"; // length 46
+        let year = null;
+        let authorId = "test authorId ";
+        const bookInfo = [title, publisher, year, authorId];
+      
+        
+        try {
+            const addQuery = "INSERT INTO books (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
+            await new Promise((resolve, reject) => {
+                connection.query(addQuery, bookInfo, (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
+                });
+            });
+
+            fail("Expected an error to be thrown.");
+
+        } catch (error) {
+            expect(error.code).toBe("ER_DATA_TOO_LONG");
+        }
+    });
+      
 });

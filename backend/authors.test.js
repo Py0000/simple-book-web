@@ -119,7 +119,7 @@ describe("Authors Database Tests", () => {
       
         // check that author was deleted from database
         const selectQuery = "SELECT * FROM testauthors WHERE id = ?";
-        const authorAfterDelete = await new Promise((resolve, reject) => {
+        const selectResult = await new Promise((resolve, reject) => {
             connection.query(selectQuery, [id], (error, results) => {
                 if (error) reject(error);
                 else resolve(results[0]);
@@ -127,7 +127,7 @@ describe("Authors Database Tests", () => {
         });
         
         expect(removeResult.affectedRows).toBe(1); // check that one row was deleted
-        expect(authorAfterDelete).toBeUndefined(); // ensure that author does not exist
+        expect(selectResult).toBeUndefined(); // ensure that author does not exist
     });
 
 
@@ -182,6 +182,31 @@ describe("Authors Database Tests", () => {
         // check that updated details are as expected
         expect(selectResults[0].name).toBe(updatedName);
         expect(selectResults[0].biography).toBe(updatedBiography);
+    });
+
+    
+    test("Exceed 200 character limit, should fail", async () => {
+        let title = "test title ";
+        let publisher = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"; // length 200
+        let year = null;
+        let authorId = "test authorId ";
+        const bookInfo = [title, publisher, year, authorId];
+      
+        
+        try {
+            const addQuery = "INSERT INTO books (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
+            await new Promise((resolve, reject) => {
+                connection.query(addQuery, bookInfo, (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
+                });
+            });
+
+            fail("Expected an error to be thrown.");
+
+        } catch (error) {
+            expect(error.code).toBe("ER_DATA_TOO_LONG");
+        }
     });
     
 });
