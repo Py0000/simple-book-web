@@ -1,10 +1,10 @@
 import {Routes, Route, BrowserRouter} from "react-router-dom"
-import ViewBook from "./commands/ViewBook";
-import AddBook from "./commands/AddBook";
-import UpdateBook from "./commands/UpdateBook";
-import ViewAuthors from "./commands/ViewAuthors";
-import AddAuthor from "./commands/AddAuthor";
-import UpdateAuthor from "./commands/UpdateAuthor";
+import ViewBook from "./commands/books/ViewBook";
+import AddBook from "./commands/books/AddBook";
+import UpdateBook from "./commands/books/UpdateBook";
+import ViewAuthors from "./commands/authors/ViewAuthors";
+import AddAuthor from "./commands/authors/AddAuthor";
+import UpdateAuthor from "./commands/authors/UpdateAuthor";
 
 function App() {
   return (

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Card from '../components/Card';
-import './View.css';
+
+import Card from '../../ui/Card';
+import '../../ui/View.css';
 
 const ViewBook = () => {
     

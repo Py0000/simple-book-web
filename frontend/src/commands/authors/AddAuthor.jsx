@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-import classes from '../components/Form.module.css';
-import FormButton from '../components/FormButton';
-import ErrorModal from '../components/ErrorModel';
-import './AddAuthor.css';
+import classes from '../../ui/Form.module.css';
+import FormButton from '../../ui/FormButton';
+import ErrorModal from '../../ui/ErrorModel';
+import '../../ui/AddAuthor.css';
 
 const AddAuthor = () => {
     const path = "http://localhost:9000/authors";
