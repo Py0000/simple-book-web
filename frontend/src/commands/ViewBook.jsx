@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Card from '../components/Card';
-import './View.css';
+import './ViewBook.css';
 
-const View = () => {
+const ViewBook = () => {
     
     const [books, displayBooks] = useState([]);
 
@@ -48,7 +48,7 @@ const View = () => {
     return (
         <div className='main-view'>
             <h1>Simple CRUD Book Application</h1>
-            <button className='add-book-button'><Link to="/add">Add Book</Link></button>
+            <button className='add-book-button'><Link to="/addbook">Add Book</Link></button>
             <Card className='book-view'>
                 {books.map(book => (
                     <div className='book-item' key={book.id}>
@@ -59,7 +59,7 @@ const View = () => {
                             <p>{book.authorId}</p>
                         </div>
                         <button className='book-item__delete' onClick={()=>handleDelete(book.id)}>Delete</button>
-                        <button className='book-item__update'><Link to={`/update/${book.id}`}>Update</Link></button>
+                        <button className='book-item__update'><Link to={`/updatebook/${book.id}`}>Update</Link></button>
                     </div>    
                 ))}
             </Card>
@@ -68,4 +68,4 @@ const View = () => {
     )
 }
 
-export default View
+export default ViewBook;

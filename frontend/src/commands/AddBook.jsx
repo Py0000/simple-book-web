@@ -6,7 +6,7 @@ import classes from '../components/Form.module.css';
 import FormButton from '../components/FormButton';
 import ErrorModal from '../components/ErrorModel';
 
-const Add = () => {
+const AddBook = () => {
     const path = "http://localhost:9000/books";
 
     const [book, setBook] = useState({
@@ -91,4 +91,4 @@ const Add = () => {
     )
 }
 
-export default Add
+export default AddBook;
