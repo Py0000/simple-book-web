@@ -5,6 +5,7 @@
 .main-view h1 {
     text-align: center;
     font-size: 3.5rem;
+    color: black;
 }
 
 .book-view{
@@ -40,6 +41,13 @@
 .add-book-button :link{
     text-decoration: none;
 }
+
+.add-book-button:hover,
+.add-book-button:active {
+    background: #0e387a;;
+    border-color: #0e387a;;
+    color: whitesmoke;
+  }
 
 .book-item {
     display: flex;
@@ -94,6 +102,11 @@
     margin-right: 5px;
 }
 
+.book-item__delete:hover,
+.book-item__delete:active {
+    border-color: crimson;  
+}
+
 .book-item__update {
     font-size: 1.15rem;
     cursor: pointer;
@@ -118,6 +131,10 @@
     text-decoration: none;
 }
 
+.book-item__update:hover,
+.book-item__update:active {
+    border-color:deepskyblue;  
+}
 
 @media (min-width: 580px) {
     .book-item__description {

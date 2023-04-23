@@ -1,0 +1,40 @@
+h1 {
+    color: black;
+    text-align: center;
+    font-size: 3.5rem;
+}
+
+.input {
+    margin: 2rem auto;
+    padding: 1rem;
+    width: 90%;
+    max-width: 60rem;
+}
+  
+.input label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+  
+.input input {
+    font: inherit;
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 0.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.add-form__button {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid #0e387a;
+    background-color: #9fafca;
+    color: #00003f;
+    border-radius: 12px;
+    width: 200px;
+    max-width: 90%;
+    height: 100rem;
+}
