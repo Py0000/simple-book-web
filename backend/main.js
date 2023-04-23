@@ -1,5 +1,8 @@
 
 const BACKEND_PORT_NUM = 9000;
+const BOOKS_DB_TABLE = "/books";
+const AUTHORS_DB_TABLE = "/authors";
+const TABLE_ELEMENT_INDICATOR = "/:id";
 
 
 // Creates the main app
@@ -31,7 +34,7 @@ app.get("/", (request, response) => {
 
 
 // Retrieving all books from database
-app.get("/books", (request, response) => {
+app.get(BOOKS_DB_TABLE, (request, response) => {
     const query = "SELECT * FROM books";
 
     db.query(query, (error, data) => {
@@ -46,7 +49,7 @@ app.get("/books", (request, response) => {
 
 
 // Adding new book to database
-app.post("/books", (request, response) => {
+app.post(BOOKS_DB_TABLE, (request, response) => {
     const query = "INSERT INTO books (`title`, `publisher`, `year`, `authorId`) VALUES (?)";
 
     const bookInfo = [
@@ -69,7 +72,7 @@ app.post("/books", (request, response) => {
 
 
 // Deleting books from database
-app.delete("/books/:id", (request, response) => {
+app.delete(BOOKS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     const id = request.params.id;
     const query = "DELETE FROM books WHERE id = ?";
     
@@ -86,7 +89,7 @@ app.delete("/books/:id", (request, response) => {
 
 
 // Updating book data in database
-app.put("/books/:id", (request, response) => {
+app.put(BOOKS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     const id = request.params.id;
     const query = "UPDATE books SET `title` = ?, `publisher` = ?, `year` = ?, `authorId` = ? WHERE id = ?";
 
@@ -110,7 +113,7 @@ app.put("/books/:id", (request, response) => {
 
 
 // Retrieving all authors from database
-app.get("/authors", (request, response) => {
+app.get(AUTHORS_DB_TABLE, (request, response) => {
     const query = "SELECT * FROM authors";
 
     db.query(query, (error, data) => {
@@ -128,7 +131,7 @@ app.get("/authors", (request, response) => {
 // Configuration of database: Cannot add author with exact same names.
 // Hence, names of authors should be unique.
 // If user tries to add another author with names that already exist in table, no changes will be shown.
-app.post("/authors", (request, response) => {
+app.post(AUTHORS_DB_TABLE, (request, response) => {
     const query = "INSERT INTO authors (`name`, `biography`) VALUES (?)";
 
     const authorInfo = [
@@ -148,7 +151,7 @@ app.post("/authors", (request, response) => {
 });
 
 // Deleting authors from database
-app.delete("/authors/:id", (request, response) => {
+app.delete(AUTHORS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     const id = request.params.id;
     const query = "DELETE FROM authors WHERE id = ?";
     
@@ -165,7 +168,7 @@ app.delete("/authors/:id", (request, response) => {
 
 
 // Updating author data in database
-app.put("/authors/:id", (request, response) => {
+app.put(AUTHORS_DB_TABLE + TABLE_ELEMENT_INDICATOR, (request, response) => {
     const id = request.params.id;
     const query = "UPDATE authors SET `name` = ?, `biography` = ? WHERE id = ?";
 

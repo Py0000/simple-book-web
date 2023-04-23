@@ -7,8 +7,6 @@ const DB_NAME = "simple-book-web";
 const DB_PORT = 3306
 
 
-
-
 // Set up the database needed for the application
 const db = mysql.createConnection({
     host: HOST_NAME,
