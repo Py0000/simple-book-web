@@ -107,3 +107,80 @@ app.put("/books/:id", (request, response) => {
         return response.json(updateBooksSuccessMsg);
     })
 });
+
+
+// Retrieving all authors from database
+app.get("/authors", (request, response) => {
+    const query = "SELECT * FROM authors";
+
+    db.query(query, (error, data) => {
+        if (error) {
+            const retrieveAuthorsErrMsg = "Error retrieving all authors. \n";
+            return response.json(retrieveAuthorsErrMsg + error);
+        } 
+
+        return response.json(data);
+    });
+});
+
+
+// Adding new author to database
+// Configuration of database: Cannot add author with exact same names.
+// Hence, names of authors should be unique.
+// If user tries to add another author with names that already exist in table, no changes will be shown.
+app.post("/authors", (request, response) => {
+    const query = "INSERT INTO authors (`name`, `biography`) VALUES (?)";
+
+    const authorInfo = [
+        request.body.name, 
+        request.body.biography
+    ];
+
+    db.query(query, [authorInfo], (error, data) => {
+        if (error) {
+            const addAuthorsErrMsg = "Error adding author data. \n";
+            return response.json(addAuthorsErrMsg + error)
+        } 
+
+        const addAuthorsSuccessMsg = "Successfully added author.";
+        return response.json(addAuthorsSuccessMsg);
+    })
+});
+
+// Deleting authors from database
+app.delete("/authors/:id", (request, response) => {
+    const id = request.params.id;
+    const query = "DELETE FROM authors WHERE id = ?";
+    
+    db.query(query, [id], (error, data) => {
+        if (error) {
+            const deleteAuthorsErrMsg = "Error deleting author data. \n";
+            return response.json(deleteAuthorsErrMsg + error);
+        } 
+
+        const deleteAuthorsSuccessMsg = "Successfully deleted author.";
+        return response.json(deleteAuthorsSuccessMsg);
+    });
+});
+
+
+// Updating author data in database
+app.put("/authors/:id", (request, response) => {
+    const id = request.params.id;
+    const query = "UPDATE authors SET `name` = ?, `biography` = ? WHERE id = ?";
+
+    const updatedData = [
+        request.body.name, 
+        request.body.biography
+    ];
+
+    db.query(query, [...updatedData, id], (error, data) => {
+        if (error) {
+            const updateAuthorsErrMsg = "Error updating author data. \n";
+            return response.json(updateAuthorsErrMsg + error);
+        } 
+
+        const updateAuthorsSuccessMsg = "Successfully updated author.";
+        return response.json(updateAuthorsSuccessMsg);
+    })
+});
