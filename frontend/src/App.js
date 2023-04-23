@@ -1,16 +1,16 @@
 import {Routes, Route, BrowserRouter} from "react-router-dom"
-import View from "./commands/View";
-import Add from "./commands/Add";
-import Update from "./commands/Update";
+import ViewBook from "./commands/ViewBook";
+import AddBook from "./commands/AddBook";
+import UpdateBook from "./commands/UpdateBook";
 
 function App() {
   return (
     <div >
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<View/>}/>
-          <Route path="/add" element={<Add/>}/>
-          <Route path="/update/:id" element={<Update/>}/>
+          <Route path="/" element={<ViewBook/>}/>
+          <Route path="/addbook" element={<AddBook/>}/>
+          <Route path="/updatebook/:id" element={<UpdateBook/>}/>
         </Routes>
       </BrowserRouter>
     </div>
