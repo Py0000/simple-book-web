@@ -122,3 +122,24 @@ app.get("/authors", (request, response) => {
         return response.json(data);
     });
 });
+
+
+// Adding new author to database
+app.post("/authors", (request, response) => {
+    const query = "INSERT INTO authors (`name`, `biography`) VALUES (?)";
+
+    const authorInfo = [
+        request.body.name, 
+        request.body.biography
+    ];
+
+    db.query(query, [authorInfo], (error, data) => {
+        if (error) {
+            const addAuthorsErrMsg = "Error adding author data. \n";
+            return response.json(addAuthorsErrMsg + error)
+        } 
+
+        const addAuthorsSuccessMsg = "Successfully added author.";
+        return response.json(addAuthorsSuccessMsg);
+    })
+});
