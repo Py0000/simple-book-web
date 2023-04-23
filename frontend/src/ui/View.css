@@ -16,7 +16,7 @@
     max-width: 90%;
 }
 
-.add-item-button{
+.add-item__button{
     font-size: 1.5rem;
     cursor: pointer;
     padding: 1rem;
@@ -28,23 +28,23 @@
     max-width: 90%;
 }
 
-.add-item-button :visited{
+.add-item__button :visited{
     text-decoration: none;
     color: inherit;
 }
 
-.add-item-button :checked{
+.add-item__button :checked{
     text-decoration: none;
     color: inherit;
 }
 
-.add-item-button :link{
+.add-item__button :link{
     text-decoration: none;
     color: inherit;
 }
 
-.add-item-button:hover,
-.add-item-button:active {
+.add-item__button:hover,
+.add-item__button:active {
     background: #0e387a;;
     border-color: #0e387a;;
     color: whitesmoke;
@@ -151,7 +151,7 @@
 }
 
 
-.view-others-button{
+.view-others__button{
     font-size: 1.5rem;
     cursor: pointer;
     padding: 1rem;
@@ -164,23 +164,23 @@
     margin-left: 15rem;
 }
 
-.view-others-button :visited{
+.view-others__button :visited{
     text-decoration: none;
     color: inherit;
 }
 
-.view-others-button :checked{
+.view-others__button :checked{
     text-decoration: none;
     color: inherit;
 }
 
-.view-others-button :link{
+.view-others__button :link{
     text-decoration: none;
     color: inherit;
 }
 
-.view-others-button:hover,
-.view-others-button:active {
+.view-others__button:hover,
+.view-others__button:active {
     background: #0e387a;;
     border-color: #0e387a;;
     color: whitesmoke;

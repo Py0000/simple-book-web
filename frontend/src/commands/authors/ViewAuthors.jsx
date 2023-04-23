@@ -49,8 +49,8 @@ const ViewAuthors = () => {
     return (
         <div className='main-view'>
             <h1>Authors in Simple CRUD Book Application</h1>
-            <button className='add-item-button'><Link to="/add_author">Add Authors</Link></button>
-            <button className='view-others-button'><Link to="/">View All Books</Link></button>
+            <button className='add-item__button'><Link to="/add_author">Add Authors</Link></button>
+            <button className='view-others__button'><Link to="/">View All Books</Link></button>
             <Card className='item-view'>
                 {authors.map(author => (
                     <div className='item-item' key={author.id}>

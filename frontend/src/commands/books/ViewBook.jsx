@@ -49,8 +49,8 @@ const ViewBook = () => {
     return (
         <div className='main-view'>
             <h1>Simple CRUD Book Application</h1>
-            <button className='add-item-button'><Link to="/addbook">Add Book</Link></button>
-            <button className='view-others-button'><Link to="/view_authors">View All Authors</Link></button>
+            <button className='add-item__button'><Link to="/addbook">Add Book</Link></button>
+            <button className='view-others__button'><Link to="/view_authors">View All Authors</Link></button>
             <Card className='item-view'>
                 {books.map(book => (
                     <div className='item-item' key={book.id}>
