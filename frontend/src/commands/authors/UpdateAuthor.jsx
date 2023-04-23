@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import classes from '../../ui/Form.module.css';
 import FormButton from '../../ui/FormButton';
-import ErrorModal from '../../ui/ErrorModel';
+import Modal from '../../ui/Modal';
 
 const UpdateAuthor = () => {
     const [author, setAuthor] = useState({
@@ -96,7 +96,7 @@ const UpdateAuthor = () => {
 
     return (
         <div>
-            {error && <ErrorModal title={error.title} message={error.message} handleError={errorHandler}></ErrorModal>}
+            {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             <div className={classes.input}>
                 <h1>Update Author</h1>
                 <input type="text" placeholder='Enter name here' onChange={handleChange} name="name"></input>

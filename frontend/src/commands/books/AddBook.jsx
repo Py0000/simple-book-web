@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 import classes from '../../ui/Form.module.css';
 import FormButton from '../../ui/FormButton';
-import ErrorModal from '../../ui/ErrorModel';
+import Modal from '../../ui/Modal';
+import '../../ui/AddBook.css';
 
 const AddBook = () => {
     const path = "http://localhost:9000/books";
@@ -17,9 +19,9 @@ const AddBook = () => {
     });
 
     const [error, setError] = useState();
-    
-    const nagivateToPage = useNavigate();
 
+    const [status, setStatus] = useState();
+    
     const isValidInput = () => {
         let isTitleEmpty = book.title.trim().length === 0;
         let isPublisherEmpty = book.publisher.trim().length === 0;
@@ -54,11 +56,13 @@ const AddBook = () => {
                 } 
 
                 // Input valid, add to database
-                await axios.post(path, book);
+                let res = await axios.post(path, book);
                 
-                // Nagivate back to home page after adding
-                const homepage = "/";
-                nagivateToPage(homepage);
+                setStatus({
+                    title: "Added Book Status",
+                    message: res.data
+                });
+
             } catch (error) {
                 const errMsg = "[Frontend] Error adding data to backend. \n";
                 console.log(errMsg + error);
@@ -76,9 +80,15 @@ const AddBook = () => {
         setError(null);
     }
 
+    const statusHandler = () => {
+        setStatus(null);
+    }
+
     return (
         <div>
-            {error && <ErrorModal title={error.title} message={error.message} handleError={errorHandler}></ErrorModal>}
+            {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
+            {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
+            <button className='add-back__button'><Link to="/">Back</Link></button>
             <div className={classes.input}>
                 <h1>Add Book</h1>
                 <input type="text" placeholder='Enter book title here' onChange={handleChange} name="title"></input>
@@ -86,7 +96,12 @@ const AddBook = () => {
                 <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>
                 <input type="text" placeholder='Enter book author here' onChange={handleChange} name="authorId"></input>
                 <FormButton type="submit" onClick={handleClick}>Add Book</FormButton>
+                <button className='add-other__button'><Link to="/add_author">Save Author's Details Here</Link></button>
             </div>
+            <div >
+                
+            </div>
+            
         </div>
     )
 }
