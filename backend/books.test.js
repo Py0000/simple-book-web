@@ -5,7 +5,7 @@ const USER_NAME = "root";
 const PASSWORD = "";
 const DB_NAME = "simple-book-web";
 
-describe("Database Tests", () => {
+describe("Book Database Tests", () => {
     
     let connection;
 
@@ -28,6 +28,18 @@ describe("Database Tests", () => {
         });
     });
 
+
+    afterAll((done) => {
+        let dropTableSQL = "DROP TABLE IF EXISTS `testbooks`";
+        connection.query(dropTableSQL, (error, results) => {
+            if (error) throw error;
+            connection.end(() => {
+                done();
+            });
+        });
+    });    
+    
+
     test('Retrieving all books from test books database', async () => {
         const query = 'SELECT * FROM testbooks';
 
@@ -44,77 +56,94 @@ describe("Database Tests", () => {
 
 
     test("Adding books to testbooks database", async () => {
-        let id = 1;
-        let title = "test title " + id;
-        let publisher = "test publisher " + id;
-        let year = id * 1000;
-        let authorId = "test authorId " + id;
-      
-        const query = "INSERT INTO testbooks (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
-      
+        let title = "test title";
+        let publisher = "test publisher";
+        let year = 1000;
+        let authorId = "test authorId";
+
         const bookInfo = [title, publisher, year, authorId];
       
-        let results = await new Promise((resolve, reject) => {
-            connection.query(query, bookInfo, (error, results) => {
-                if (error) reject(error);
-                else resolve(results);
-            });
-        });
-      
-        const expected = 1;
-        expect(results.affectedRows).toBe(expected);
-    });
-
-
-    it("Deleting a book from database test", async () => {
-        let id = 0;
-        let title = "test title 1" ;
-        let publisher = "test publisher 1";
-        let year = 1000;
-        let authorId = "test authorId 1";
-    
+        // add book into database
         const addQuery = "INSERT INTO testbooks (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
-    
-        const bookInfo = [
-            title, 
-            publisher,
-            year, 
-            authorId
-        ];
-        
-        // Add any entry first
-        await new Promise((resolve, reject) => {
+        let insertResults = await new Promise((resolve, reject) => {
             connection.query(addQuery, bookInfo, (error, results) => {
                 if (error) reject(error);
                 else resolve(results);
             });
         });
-        
-
-        // Delete
-        const removeQuery = "DELETE FROM testbooks WHERE id = ?";
-        const results = await new Promise((resolve, reject) => {
-            connection.query(removeQuery, [id], (error, results) => {
+    
+        // check that the book was successfully added
+        const selectQuery = "SELECT * FROM testbooks WHERE title = ? AND publisher = ? AND year = ? AND authorId = ?";
+        const selectResult = await new Promise((resolve, reject) => {
+            connection.query(selectQuery, bookInfo, (error, results) => {
                 if (error) reject(error);
                 else resolve(results);
-                
             });
         });
         
-        const expected = 0;
-        expect(results.affectedRows).toBe(expected);
-    });    
+        // check that one row was added
+        expect(insertResults.affectedRows).toBe(1); 
+        expect(selectResult.length).toBe(1); 
+
+        // check that added details are as expected
+        expect(selectResult[0].title).toBe(title); 
+        expect(selectResult[0].publisher).toBe(publisher);
+        expect(selectResult[0].year).toBe(year);
+        expect(selectResult[0].authorId).toBe(authorId);
+    });
+    
+
+
+    test("Deleting a book from database test", async () => {
+        let title = "test title";
+        let publisher = "test publisher";
+        let year = 1000;
+        let authorId = "test authorId";
+
+        const bookInfo = [title, publisher, year, authorId];
+    
+        // add book to database first
+        const addQuery = "INSERT INTO testbooks (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
+        const addResult = await new Promise((resolve, reject) => {
+            connection.query(addQuery, bookInfo, (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
+            });
+        });
+
+        // get the inserted ID (incase it was added to a value that was unexpected)
+        let id = addResult.insertId; 
+    
+        // delete book from database
+        const removeQuery = "DELETE FROM testbooks WHERE id = ?";
+        const removeResult = await new Promise((resolve, reject) => {
+            connection.query(removeQuery, [id], (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
+            });
+        });
+    
+        // check that book was deleted from database
+        const selectQuery = "SELECT * FROM testbooks WHERE id = ?";
+        const selectResult = await new Promise((resolve, reject) => {
+            connection.query(selectQuery, [id], (error, results) => {
+                if (error) reject(error);
+                else resolve(results[0]);
+            });
+        });
+    
+        expect(removeResult.affectedRows).toBe(1); // check that one row was deleted
+        expect(selectResult).toBeUndefined(); // ensure that book does not exist
+    });
+        
       
 
-    it("Updating book entry in database test", async () => {
-        let id = 1;
-        let title = "test title " + id;
-        let publisher = "test publisher " + id;
-        let year = id * 1000;
-        let authorId = "test authorId " + id;
-    
-        const addQuery = "INSERT INTO testbooks (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
-    
+    test("Updating book entry in database test", async () => {
+        let title = "test title ";
+        let publisher = "test publisher ";
+        let year = 1000;
+        let authorId = "test authorId";
+
         const bookInfo = [
             title, 
             publisher,
@@ -123,57 +152,56 @@ describe("Database Tests", () => {
         ];
     
         // Add an entry first
-        await new Promise((resolve, reject) => {
+        const addQuery = "INSERT INTO testbooks (`title`, `publisher`, `year`, `authorId`) VALUES (?, ?, ?, ?)";
+        const addResult = await new Promise((resolve, reject) => {
             connection.query(addQuery, bookInfo, (error, results) => {
                 if (error) reject(error);
                 else resolve(results);
             });
         });
+
+        // get the inserted ID (incase it was added to a value that was unexpected)
+        let id = addResult.insertId; 
     
         // Update
         let updatedTitle = "updated title";
         let updatedPublisher = "updated publisher";
         let updatedYear = 9999;
         let updatedAuthorId = "updated authorId";
-    
-        const updateQuery = "UPDATE testbooks SET `title` = ?, `publisher` = ?, `year` = ?, `authorId` = ? WHERE id = ?";
-    
+
         const updatedData = [
             updatedTitle, 
             updatedPublisher, 
             updatedYear, 
             updatedAuthorId,
-            id
         ];
     
-        await new Promise((resolve, reject) => {
-            connection.query(updateQuery, updatedData, (error, results) => {
+        const updateQuery = "UPDATE testbooks SET `title` = ?, `publisher` = ?, `year` = ?, `authorId` = ? WHERE id = ?";
+        const updateResults = await new Promise((resolve, reject) => {
+            connection.query(updateQuery, [...updatedData, id], (error, results) => {
                 if (error) reject(error);
                 else resolve(results);
                 expect(results.affectedRows).toBe(1);
-    
-                const selectQuery = "SELECT * FROM testbooks WHERE id = ?";
-                connection.query(selectQuery, [id], (error, results) => {
-                    if (error) reject(error);
-                    else resolve(results);
-                    let entry = results[0];
-                    expect(entry.title === updatedTitle).toBe(true);
-                    expect(entry.publisher === updatedPublisher).toBe(true);
-                    expect(entry.year === updatedYear).toBe(true);
-                    expect(entry.authorId === updatedAuthorId).toBe(true);
-                });
             });
         });
+
+
+        const selectQuery = "SELECT * FROM testbooks WHERE id = ?";
+        let selectResults = await new Promise((resolve, reject) => {
+            connection.query(selectQuery, [id], (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
+            });
+        });
+        
+        // check that one row was updated
+        expect(updateResults.affectedRows).toBe(1);
+
+        // check that updated details are as expected
+        expect(selectResults[0].title).toBe(updatedTitle);
+        expect(selectResults[0].publisher).toBe(updatedPublisher);
+        expect(selectResults[0].year).toBe(updatedYear);
+        expect(selectResults[0].authorId).toBe(updatedAuthorId);
     });
     
-
-    afterAll((done) => {
-        let dropTableSQL = "DROP TABLE IF EXISTS `testbooks`";
-        connection.query(dropTableSQL, (error, results) => {
-            if (error) throw error;
-            connection.end(() => {
-                done();
-            });
-        });
-    });    
 });
