@@ -162,3 +162,25 @@ app.delete("/authors/:id", (request, response) => {
         return response.json(deleteAuthorsSuccessMsg);
     });
 });
+
+
+// Updating author data in database
+app.put("/authors/:id", (request, response) => {
+    const id = request.params.id;
+    const query = "UPDATE authors SET `name` = ?, `biography` = ? WHERE id = ?";
+
+    const updatedData = [
+        request.body.name, 
+        request.body.biography
+    ];
+
+    db.query(query, [...updatedData, id], (error, data) => {
+        if (error) {
+            const updateAuthorsErrMsg = "Error updating author data. \n";
+            return response.json(updateAuthorsErrMsg + error);
+        } 
+
+        const updateBooksSuccessMsg = "Successfully updated author.";
+        return response.json(updateAuthorsSuccessMsg);
+    })
+});
