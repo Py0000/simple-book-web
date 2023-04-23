@@ -9,9 +9,9 @@
     font-weight: 500;
 }
 
-.add-other__buttonn :link{
-    text-decoration: none;
+.add-other__button :link{
     color: inherit;
+    text-decoration: none;
 }
 
 .add-other__button :visited{
