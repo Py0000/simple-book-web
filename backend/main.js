@@ -29,7 +29,8 @@ const db = require("./database");
 
 // Reaching the backend server via API request (using express)
 app.get("/", (request, response) => {
-    response.json("Backend Server reached");
+    const backendConnectedMsg = "Backend Server reached";
+    response.json(backendConnectedMsg);
 });
 
 
