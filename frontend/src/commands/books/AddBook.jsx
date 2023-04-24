@@ -90,7 +90,7 @@ const AddBook = () => {
             {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
             <button className='add-back__button'><Link to="/">Back</Link></button>
             <div className={classes.input}>
-                <h1>Add Book</h1>
+                <h1>Add a New Book</h1>
                 <input type="text" placeholder='Enter book title here' onChange={handleChange} name="title"></input>
                 <input type="text" placeholder='Enter book publisher here' onChange={handleChange} name="publisher"></input>
                 <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>
