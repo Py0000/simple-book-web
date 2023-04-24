@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
@@ -14,9 +14,9 @@ describe('UpdateBook component', () => {
 
     test('Test render Update Book form', () => {
         render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <UpdateBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
         
         const pageTitle = screen.getByText("Update Existing Book");
@@ -38,9 +38,9 @@ describe('UpdateBook component', () => {
 
         axios.put.mockResolvedValueOnce({ data: {} });
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <UpdateBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         await act(async () => {
@@ -64,9 +64,9 @@ describe('UpdateBook component', () => {
 
     test('Test error message if atleast one input is invalid', async () => {
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <UpdateBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component

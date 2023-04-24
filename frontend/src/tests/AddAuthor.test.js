@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios';
 import AddAuthor from '../commands/authors/AddAuthor';
@@ -13,9 +13,9 @@ describe('AddAuthor', () => {
 
     test('Test render Add Author form', () => {
         render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
         
         const pageTitle = screen.getByText("Add New Author");
@@ -36,11 +36,11 @@ describe('AddAuthor', () => {
     });
 
     test('Test add a new author on button click', async () => {
-        // Renders "AddAuthor" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddAuthor" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values
@@ -60,11 +60,11 @@ describe('AddAuthor', () => {
     });
 
     test('Test error if input is null', async () => {
-        // Renders "AddAuthor" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddAuthor" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set invalid input values
@@ -81,11 +81,11 @@ describe('AddAuthor', () => {
     });
 
     test('Test error if input exceeds length limit', async () => {
-        // Renders "AddAuthor" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddAuthor" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set invalid input values

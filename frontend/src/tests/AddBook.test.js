@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import AddBook from '../commands/books/AddBook';
@@ -15,9 +15,9 @@ describe('AddBook', () => {
 
     test('Test render Add Book form', () => {
         render(
-            <MemoryRouter>
+            <BrowserRouter>
             <   AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
         
         const pageTitle = screen.getByText("Add a New Book");
@@ -40,11 +40,11 @@ describe('AddBook', () => {
     });
 
     test('Test functionality of adding new book on button click', async () => {
-        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddBook" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component
@@ -67,11 +67,11 @@ describe('AddBook', () => {
     });
 
     test('Test error if input year is zero', async () => {
-        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddBook" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component
@@ -90,11 +90,11 @@ describe('AddBook', () => {
     });
 
     test('Test error if input year is negative', async () => {
-        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddBook" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component
@@ -113,11 +113,11 @@ describe('AddBook', () => {
     });
 
     test('Test error if input year does not have 4 digits', async () => {
-        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddBook" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component
@@ -136,11 +136,11 @@ describe('AddBook', () => {
     });
 
     test('Test error if text-based input is null', async () => {
-        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddBook" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component
@@ -159,11 +159,11 @@ describe('AddBook', () => {
     });
 
     test('Test error if text-based input is exceeds limit', async () => {
-        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        // Renders "AddBook" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <AddBook />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component

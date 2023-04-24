@@ -37,7 +37,7 @@ const ViewBook = () => {
         try {
             const path = "http://localhost:9000/books/";
             await axios.delete(path + id);
-            window.location.reload();
+            // window.location.reload();
         }
         catch (err) {
             const errIdentifier = "[Frontend] ";
@@ -65,7 +65,6 @@ const ViewBook = () => {
                     </div>    
                 ))}
             </Card>
-            
         </div>
     )
 }

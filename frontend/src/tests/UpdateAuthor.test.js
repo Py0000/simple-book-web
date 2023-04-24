@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
@@ -14,9 +14,9 @@ describe('UpdateAuthor component', () => {
 
     test('Test render Update Author form', () => {
         render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <UpdateAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
         
         const pageTitle = screen.getByText("Update Existing Author");
@@ -34,9 +34,9 @@ describe('UpdateAuthor component', () => {
 
         axios.put.mockResolvedValueOnce({ data: {} });
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <UpdateAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         await act(async () => {
@@ -56,9 +56,9 @@ describe('UpdateAuthor component', () => {
 
     test('Test error message if atleast one input is invalid', async () => {
         const { getByPlaceholderText, getByText } = render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <UpdateAuthor />
-            </MemoryRouter>
+            </BrowserRouter>
         );
 
         // Set input values via the elements on the component
