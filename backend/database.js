@@ -1,10 +1,9 @@
 const mysql = require("mysql");
 
-const HOST_NAME = "127.0.0.1";
+const HOST_NAME = "localhost";
 const USER_NAME = "root";
 const PASSWORD = "";
 const DB_NAME = "simple-book-web";
-const DB_PORT = 3306
 
 
 // Set up the database needed for the application
@@ -13,7 +12,6 @@ const db = mysql.createConnection({
     user: USER_NAME,
     password: PASSWORD,
     database: DB_NAME,
-    port: DB_PORT
 });
 
 db.connect((error) => {
