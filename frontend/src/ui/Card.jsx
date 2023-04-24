@@ -1,7 +1,7 @@
 import './Card.css'
 
 // Wrapper UI component
-function Card(props) {
+const Card = (props) => {
     // Anything we receive from className from outside it added to the string
     const classes = 'card ' + props.className;
 
