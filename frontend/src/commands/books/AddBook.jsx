@@ -126,9 +126,6 @@ const AddBook = () => {
                 <FormButton type="submit" onClick={handleClick}>Add Book</FormButton>
                 <button className='add-other__button'><Link to="/add_author">Save Author's Details Here</Link></button>
             </div>
-            <div >
-                
-            </div>
             
         </div>
     )
