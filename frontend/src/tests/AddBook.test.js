@@ -19,7 +19,8 @@ describe('AddBook', () => {
             <   AddBook />
             </MemoryRouter>
         );
-
+        
+        const pageTitle = screen.getByText("Add a New Book");
         const titleInput = screen.getByPlaceholderText('Enter book title here');
         const publisherInput = screen.getByPlaceholderText('Enter book publisher here');
         const yearInput = screen.getByPlaceholderText('Enter published year here');
@@ -27,7 +28,8 @@ describe('AddBook', () => {
         const submitButton = screen.getByText('Add Book');
         const addAuthorButton = screen.getByText("Save Author's Details Here");
         const backButton = screen.getByText("Back");
-
+        
+        expect(pageTitle).toBeInTheDocument();
         expect(titleInput).toBeInTheDocument();
         expect(publisherInput).toBeInTheDocument();
         expect(yearInput).toBeInTheDocument();

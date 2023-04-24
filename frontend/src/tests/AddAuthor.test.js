@@ -17,7 +17,8 @@ describe('AddAuthor', () => {
                 <AddAuthor />
             </MemoryRouter>
         );
-
+        
+        const pageTitle = screen.getByText("Add New Author");
         const nameInput = screen.getByPlaceholderText('Enter name here');
         const biographyInput = screen.getByPlaceholderText('Enter biography here');
         const submitButton = screen.getByText('Add Author');
@@ -25,7 +26,7 @@ describe('AddAuthor', () => {
         const warningText = screen.getByText("Note: If the author already exists in our database, you won't be able to add it in, hence no visible change will be noticed!");
         const backButton = screen.getByText("Back");
 
-
+        expect(pageTitle).toBeInTheDocument();
         expect(nameInput).toBeInTheDocument();
         expect(biographyInput).toBeInTheDocument();
         expect(submitButton).toBeInTheDocument();

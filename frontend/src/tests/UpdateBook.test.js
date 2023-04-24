@@ -18,13 +18,15 @@ describe('UpdateBook component', () => {
                 <UpdateBook />
             </MemoryRouter>
         );
-
+        
+        const pageTitle = screen.getByText("Update Existing Book");
         const titleInput = screen.getByPlaceholderText('Enter book title here');
         const publisherInput = screen.getByPlaceholderText('Enter book publisher here');
         const yearInput = screen.getByPlaceholderText('Enter published year here');
         const authorInput = screen.getByPlaceholderText('Enter book author here');
         const submitButton = screen.getByText('Update Book');
-
+        
+        expect(pageTitle).toBeInTheDocument();
         expect(titleInput).toBeInTheDocument();
         expect(publisherInput).toBeInTheDocument();
         expect(yearInput).toBeInTheDocument();
