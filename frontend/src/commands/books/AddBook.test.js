@@ -8,8 +8,12 @@ import AddBook from './AddBook';
 jest.mock('axios');
 
 describe('AddBook', () => {
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+      });
     
-    test('Test functionality of adding new book', async () => {
+    test('Test functionality of adding new book on button click', async () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
@@ -36,7 +40,7 @@ describe('AddBook', () => {
         expect(screen.getByText('Book added successfully')).toBeInTheDocument();
     });
 
-    test('should show an error if input year is zero', async () => {
+    test('Test error if input year is zero', async () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
@@ -59,7 +63,7 @@ describe('AddBook', () => {
         expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
     });
 
-    test('should show an error if input year is negative', async () => {
+    test('Test error if input year is negative', async () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
@@ -82,7 +86,7 @@ describe('AddBook', () => {
         expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
     });
 
-    test('should show an error if input year does not have 4 digits', async () => {
+    test('Test error if input year does not have 4 digits', async () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
@@ -105,7 +109,7 @@ describe('AddBook', () => {
         expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
     });
 
-    test('should show an error if text-based input is invalid', async () => {
+    test('Test error if text-based input is null', async () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
@@ -126,5 +130,28 @@ describe('AddBook', () => {
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
         expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+    });
+
+    test('Test error if text-based input is exceeds limit', async () => {
+        // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
+        const { getByPlaceholderText, getByText } = render(
+            <MemoryRouter>
+                <AddBook />
+            </MemoryRouter>
+        );
+
+        // Set input values via the elements on the component
+        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: '01234567890123456789012345678901234567890123456789' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '2022' } });
+        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
+
+        // Click add book button on the component 
+        fireEvent.click(getByText('Add Book'));
+
+        // Wait for the error modal to appear
+        // Should show error message
+        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
+        expect(screen.getByText('Publisher cannot be more than 45 characters long!')).toBeInTheDocument();
     });
 });

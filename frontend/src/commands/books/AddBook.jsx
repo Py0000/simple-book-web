@@ -34,6 +34,11 @@ const AddBook = () => {
         return isInputValid;
     }
 
+    const isTooLong = (desc, limit) => {
+        let descLength = desc.trim().length;
+        return descLength > limit;
+    }
+
 
     const handleChange = (e) => {
         setBook((prev) => (
@@ -51,6 +56,30 @@ const AddBook = () => {
                     setError({
                         title: "Invalid Input",
                         message: "One or more input is empty / invalid!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.title, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "Title cannot be more than 45 characters long!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.publisher, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "Publisher cannot be more than 45 characters long!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.authorId, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "AuthorId cannot be more than 45 characters long!"
                     });
                     return;
                 } 
