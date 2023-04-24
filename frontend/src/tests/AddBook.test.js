@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
-import AddBook from './AddBook';
+import AddBook from '../commands/books/AddBook';
 
 // Mock the actual functionality of axios during testing
 jest.mock('axios');
@@ -11,8 +11,32 @@ describe('AddBook', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-      });
-    
+    });
+
+    test('Test render Add Book form', () => {
+        render(
+            <MemoryRouter>
+            <   AddBook />
+            </MemoryRouter>
+        );
+
+        const titleInput = screen.getByPlaceholderText('Enter book title here');
+        const publisherInput = screen.getByPlaceholderText('Enter book publisher here');
+        const yearInput = screen.getByPlaceholderText('Enter published year here');
+        const authorInput = screen.getByPlaceholderText('Enter book author here');
+        const submitButton = screen.getByText('Add Book');
+        const addAuthorButton = screen.getByText("Save Author's Details Here");
+        const backButton = screen.getByText("Back");
+
+        expect(titleInput).toBeInTheDocument();
+        expect(publisherInput).toBeInTheDocument();
+        expect(yearInput).toBeInTheDocument();
+        expect(authorInput).toBeInTheDocument();
+        expect(submitButton).toBeInTheDocument();
+        expect(addAuthorButton).toBeInTheDocument();
+        expect(backButton).toBeInTheDocument();
+    });
+
     test('Test functionality of adding new book on button click', async () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
@@ -24,7 +48,7 @@ describe('AddBook', () => {
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
         fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Publisher' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '2020' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2020 } });
         fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Author Id' } });
 
         // Mock axios POST response
@@ -44,14 +68,14 @@ describe('AddBook', () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
-            <AddBook />
+                <AddBook />
             </MemoryRouter>
         );
 
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
         fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '0000' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: `0b0000` } });
         fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
@@ -67,14 +91,14 @@ describe('AddBook', () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
-            <AddBook />
+                <AddBook />
             </MemoryRouter>
         );
 
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
         fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '-1000' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: -1000 } });
         fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
@@ -90,14 +114,14 @@ describe('AddBook', () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
-            <AddBook />
+                <AddBook />
             </MemoryRouter>
         );
 
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
         fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '22' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 22 } });
         fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
@@ -113,14 +137,14 @@ describe('AddBook', () => {
         // Renders "AddBook" component within MemoryRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <MemoryRouter>
-            <AddBook />
+                <AddBook />
             </MemoryRouter>
         );
 
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: '' } });
         fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '2022' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2022 } });
         fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
@@ -143,7 +167,7 @@ describe('AddBook', () => {
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
         fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: '01234567890123456789012345678901234567890123456789' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: '2022' } });
+        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2022 } });
         fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
