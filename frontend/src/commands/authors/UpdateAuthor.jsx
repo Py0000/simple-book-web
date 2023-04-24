@@ -98,10 +98,10 @@ const UpdateAuthor = () => {
         <div>
             {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             <div className={classes.input}>
-                <h1>Update Author</h1>
+                <h1>Update Existing Author</h1>
                 <input type="text" placeholder='Enter name here' onChange={handleChange} name="name"></input>
                 <input type="text" placeholder='Enter biography here' onChange={handleChange} name="biography"></input>
-                <FormButton type="submit" onClick={handleClick}>Update Book</FormButton>
+                <FormButton type="submit" onClick={handleClick}>Update Author</FormButton>
             </div>
         </div>
     );

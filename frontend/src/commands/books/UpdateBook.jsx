@@ -36,6 +36,11 @@ const UpdateBook = () => {
         return isInputValid;
     }
 
+    const isTooLong = (desc, limit) => {
+        let descLength = desc.trim().length;
+        return descLength > limit;
+    }
+
 
     const location = useLocation();
     const id = location.pathname.split("/")[2];
@@ -49,6 +54,30 @@ const UpdateBook = () => {
                     setError({
                         title: "Invalid Input",
                         message: "One or more input is empty / invalid!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.title, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "Title cannot be more than 45 characters long!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.publisher, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "Publisher cannot be more than 45 characters long!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.authorId, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "AuthorId cannot be more than 45 characters long!"
                     });
                     return;
                 } 
@@ -82,7 +111,7 @@ const UpdateBook = () => {
         <div>
             {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             <div className={classes.input}>
-                <h1>Update Book</h1>
+                <h1>Update Existing Book</h1>
                 <input type="text" placeholder='Enter book title here' onChange={handleChange} name="title"></input>
                 <input type="text" placeholder='Enter book publisher here' onChange={handleChange} name="publisher"></input>
                 <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>

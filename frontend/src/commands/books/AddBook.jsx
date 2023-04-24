@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 import classes from '../../ui/Form.module.css';
 import FormButton from '../../ui/FormButton';
@@ -34,6 +33,11 @@ const AddBook = () => {
         return isInputValid;
     }
 
+    const isTooLong = (desc, limit) => {
+        let descLength = desc.trim().length;
+        return descLength > limit;
+    }
+
 
     const handleChange = (e) => {
         setBook((prev) => (
@@ -51,6 +55,30 @@ const AddBook = () => {
                     setError({
                         title: "Invalid Input",
                         message: "One or more input is empty / invalid!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.title, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "Title cannot be more than 45 characters long!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.publisher, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "Publisher cannot be more than 45 characters long!"
+                    });
+                    return;
+                } 
+
+                if (isTooLong(book.authorId, 45)) {
+                    setError({
+                        title: "Invalid Input",
+                        message: "AuthorId cannot be more than 45 characters long!"
                     });
                     return;
                 } 
@@ -90,7 +118,7 @@ const AddBook = () => {
             {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
             <button className='add-back__button'><Link to="/">Back</Link></button>
             <div className={classes.input}>
-                <h1>Add Book</h1>
+                <h1>Add a New Book</h1>
                 <input type="text" placeholder='Enter book title here' onChange={handleChange} name="title"></input>
                 <input type="text" placeholder='Enter book publisher here' onChange={handleChange} name="publisher"></input>
                 <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>
