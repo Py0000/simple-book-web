@@ -127,6 +127,47 @@ Reason for using boundary value analysis is because input near the boundaries of
 
 Moreover, manual testing is also done after the implementation of each frontend component and logic to ensure that the application is working as expected. 
 
+<br> <br>
+
+## Screenshots of the application
+
+#### Main Page / View All Books Page
+
+<br>
+
+#### Add Book Page
+
+<br>
+
+**When there is an error**
+
+<br>
+
+**When added successfully**
+
+<br>
+
+#### Update Book Page
+
+<br>
+
+#### View All Authors Page
+
+<br>
+
+#### Add Author Page
+
+<br>
+
+**When there is an error**
+
+<br>
+
+**When added successfully**
+
+<br>
+
+#### Update Author Page
 
 
 
