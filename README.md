@@ -20,9 +20,10 @@
     * Go to `backend` folder.
     * Go to `database.js`.
     * Edit lines 3 to 5 such that it follows your database configuration. 
-    * ``` const HOST_NAME = "localhost";
-            const USER_NAME = "root";
-            const PASSWORD = "";
+    * ``` 
+    const HOST_NAME = "localhost";
+    const USER_NAME = "root";
+    const PASSWORD = "";
       ```
 
   * You should see the something similar to the following in your terminal at this point. 
