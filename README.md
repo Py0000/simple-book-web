@@ -67,20 +67,25 @@ In the backend server, there are 2 classes:
   * Read: `GET` request is used to get all the books and authors from the database. 
   * Update: `PUT` request is used to update an entry in the data base.
   * Delete: `DELETE` request is used to update an entry in database. 
+  
 <br> 
+
 Reason for having 2 seperate classes instead of combining every into one "god backend server class":
-1. Single Responsibility Principle: Each class is only required to either handle the database or CRUD operations. 
-2. Ensures Open-Closed Principle: 
+* Single Responsibility Principle: Each class is only required to either handle the database or CRUD operations. 
+* Ensures Open-Closed Principle: 
   * If there is a need to modify/enhance the database, it could be easily extended without possibly affecting other classes.
+  
 <br>
 
 Trade-offs: All the 4 CRUD operations are lumped into the `main.js` file, this is to prevent the creation of many different classes for each operation / table. Since the is a small and simple application, having a seperate file for each operation is necessary. However, if the application will be extended and the logic gets more complicated, then a possible design would be to have each class to handle each operation so that `main.js` would not be too complex. 
+
 <br>
 
 In the frontend server, these are 3 main components for the books and authors:
-1. `AddBook.jsx` / `AddAuthor.jsx`: Used to handle the add operation.
-2. `UpdateBook.jsx` / `UpdateAuthor.jsx`: Used to handle the update operation. 
-3. `ViewBook.jsx` / `ViewAuthor.jsx`: Used to display all the books / authors.
+* `AddBook.jsx` / `AddAuthor.jsx`: Used to handle the add operation.
+* `UpdateBook.jsx` / `UpdateAuthor.jsx`: Used to handle the update operation. 
+* `ViewBook.jsx` / `ViewAuthor.jsx`: Used to display all the books / authors.
+
 <br>
 
 For each item in `ViewBook.jsx` / `ViewAuthor.jsx`:
@@ -88,6 +93,7 @@ For each item in `ViewBook.jsx` / `ViewAuthor.jsx`:
 * After an item is deleted, the application would refresh the page automatically to show the change. This removes the needs for having pop up which will add more classes / components to the application, making it more complex. 
 * There is no need for an individual page for the delete operation as there after no follow-up actions required after clicking the delete button. 
 * Similarly, an update button is also embedded in each item. The reason for doing so is the same. 
+
 <br>
 
 In `AddBook.jsx` / `AddAuthor.jsx` and `UpdateBook.jsx` / `UpdateAuthor.jsx`:
@@ -96,13 +102,15 @@ In `AddBook.jsx` / `AddAuthor.jsx` and `UpdateBook.jsx` / `UpdateAuthor.jsx`:
 * This addition is to allow the user to add an author / book after adding its associated book / author if necessary. This helps to make the usage of the application more convenient as they user does not need to navigate to the respective page to do the next operation. 
 * The addition of book / author is done separately. This is to allow some user to add an author without adding a book to the data or vice versa, hence decoupling them. 
 * The trade-off would be to introduce more logic and components to handle these operations. 
+
 <br>
 
 `Modal` Used in `AddBook.jsx` / `AddAuthor.jsx` and `UpdateBook.jsx` / `UpdateAuthor.jsx`:
 * This is used to inform users about invalid input, so that the user would know why an item is not added / updated. 
 * For `UpdateBook.jsx` / `UpdateAuthor.jsx`, after the user has successfully update the item, it would bring the user back to the main display page. 
 * For `AddBook.jsx` / `AddAuthor.jsx`, unlike updating, a modal would appear to inform the user that the item has been added successfully and the user would be able to easily dismiss by clicking the `Ok` button or anywhere in the page and remain on the same page. The reason for this is because when adding a new book / author, there is a high probability that the author / book is not in the database yet, hence the user will want to add them corresponding data in. 
-* For updating, the corresponding book / author would already have been in the database and it is assumed that a user would need to update both data at the same time. 
+* For updating, the corresponding book / author would already have been in the database and it is assumed that a user would need to update both data at the same time.
+
 <br>
 
 The main underlying design pattern used is Model-View-Controller (MVC) pattern:
