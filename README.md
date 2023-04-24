@@ -4,7 +4,7 @@
 <br>
 
 **Step 1:** Clone this git repository into your local machine. 
-  * Do the following on your terminal if you have git installed on your machine: git clone https://github.com/Py0000/simple-book-web.git
+  * Do the following on your terminal if you have git installed on your machine: `git clone https://github.com/Py0000/simple-book-web.git`
 
 **Step 2:** Ensure that you have mySQL and npm (node.js) installed on your machine. 
   * Install these if you do not have them on your local machine. 
