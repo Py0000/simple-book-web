@@ -4,18 +4,13 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import ViewAuthors from '../commands/authors/ViewAuthors';
 import * as frontendConstant from "../utils/AuthorUtils";
+import { TEST_MOCKED_AUTHORS } from './TestUtils/TestUtils';
 
 jest.mock('axios');
 
 describe('ViewAuthor', () => {
-    const mockedAuthors = [
-        {name: 'Author 1', biography: 'Biography 1'},
-        {name: 'Author 2', biography: 'Biography 2'},
-        {name: 'Author 3', biography: 'Biography 3'},
-    ];
-
     beforeEach(() => {
-        axios.get.mockResolvedValue({ data: mockedAuthors });
+        axios.get.mockResolvedValue({ data: TEST_MOCKED_AUTHORS });
     });
   
     test('Test renders ViewAuthor component', async () => {

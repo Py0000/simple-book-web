@@ -5,6 +5,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import UpdateBook from '../commands/books/UpdateBook';
 import * as frontendConstant from "../utils/BookUtils";
+import * as testConstant from './TestUtils/TestUtils';
 
 
 jest.mock('axios');
@@ -47,10 +48,10 @@ describe('UpdateBook component', () => {
 
         await act(async () => {
             // Set input values via the elements on the component
-            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Updated Title' } });
-            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Updated Publisher' } });
-            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2021 } });
-            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Updated Author Id' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.TEST_BOOK_YEAR } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
             
             // Click update book button on the component
             fireEvent.click(getByText(frontendConstant.UPDATE_BOOK_BUTTON));
@@ -58,10 +59,10 @@ describe('UpdateBook component', () => {
 
         const path = frontendConstant.BOOK_PATH + "/undefined"
         expect(axios.put).toHaveBeenCalledWith(path, {
-            title: 'Test Updated Title',
-            publisher: 'Test Updated Publisher',
-            year: "2021",
-            authorId: 'Test Updated Author Id',
+            title: testConstant.TEST_TEXT_45,
+            publisher: testConstant.TEST_TEXT_45,
+            year: testConstant.TEST_BOOK_YEAR.toString(),
+            authorId: testConstant.TEST_TEXT_45,
         });
     });
 
@@ -73,10 +74,10 @@ describe('UpdateBook component', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Publisher' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2022 } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: '01234567890123456789012345678901234567890123456789' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.TEST_BOOK_YEAR } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_46 } });
 
         // Click update book button on the component 
         fireEvent.click(getByText(frontendConstant.UPDATE_BOOK_BUTTON));

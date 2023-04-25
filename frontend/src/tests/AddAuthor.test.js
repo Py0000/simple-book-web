@@ -4,6 +4,7 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios';
 import AddAuthor from '../commands/authors/AddAuthor';
 import * as frontendConstant from "../utils/AuthorUtils";
+import * as testConstant from './TestUtils/TestUtils';
 
 jest.mock('axios');
 
@@ -45,8 +46,8 @@ describe('AddAuthor', () => {
         );
 
         // Set input values
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Author Name' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: 'Test Author Biography' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: testConstant.TEST_TEXT_200 } });
 
         // Mock axios POST response
         // Should show success message
@@ -70,7 +71,7 @@ describe('AddAuthor', () => {
 
         // Set invalid input values
         fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: '' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: 'Test Author Biography' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: testConstant.TEST_TEXT_200 } });
 
         // Click add author button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_AUTHOR_BUTTON));
@@ -81,7 +82,7 @@ describe('AddAuthor', () => {
         expect(screen.getByText(frontendConstant.ERROR_AUTHOR_NAME)).toBeInTheDocument();
     });
 
-    test('Test error if input exceeds length limit', async () => {
+    test('Test error if name exceeds limit', async () => {
         // Renders "AddAuthor" component within BrowserRouter to simulate navigation to this component
         const { getByPlaceholderText, getByText } = render(
             <BrowserRouter>
@@ -90,8 +91,29 @@ describe('AddAuthor', () => {
         );
 
         // Set invalid input values
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Author' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678902' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: testConstant.TEST_TEXT_46 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: testConstant.TEST_TEXT_200 } });
+
+        // Click add author button on the component 
+        fireEvent.click(getByText(frontendConstant.ADD_AUTHOR_BUTTON));
+
+        // Wait for error modal to appear
+        // Should show error message
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_AUTHOR_NAME)).toBeInTheDocument();
+    });
+
+    test('Test error if biography exceeds length limit', async () => {
+        // Renders "AddAuthor" component within BrowserRouter to simulate navigation to this component
+        const { getByPlaceholderText, getByText } = render(
+            <BrowserRouter>
+                <AddAuthor />
+            </BrowserRouter>
+        );
+
+        // Set invalid input values
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: testConstant.TEST_TEXT_201 } });
 
         // Click add author button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_AUTHOR_BUTTON));

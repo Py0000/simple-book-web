@@ -5,18 +5,13 @@ import axios from 'axios';
 import ViewBook from '../commands/books/ViewBook';
 import * as frontendConstant from "../utils/BookUtils";
 import * as linkConstant from '../utils/LinkUtils';
+import { TEST_MOCKED_BOOKS } from './TestUtils/TestUtils';
 
 jest.mock('axios');
 
 describe('ViewBook', () => {
-    const mockedBooks = [
-        {title: 'Book 1', publisher: 'Publisher 1', year: 2021, authorId: "1" },
-        {title: 'Book 2', publisher: 'Publisher 2', year: 2022, authorId: "2" },
-        {title: 'Book 3', publisher: 'Publisher 3', year: 2023, authorId: "3" },
-    ];
-
     beforeEach(() => {
-        axios.get.mockResolvedValue({ data: mockedBooks });
+        axios.get.mockResolvedValue({ data: TEST_MOCKED_BOOKS });
     });
   
     test('Test renders ViewBook component', async () => {

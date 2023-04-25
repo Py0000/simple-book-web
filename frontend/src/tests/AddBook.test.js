@@ -4,6 +4,7 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import AddBook from '../commands/books/AddBook';
 import * as frontendConstant from "../utils/BookUtils";
+import * as testConstant from './TestUtils/TestUtils';
 
 // Mock the actual functionality of axios during testing
 jest.mock('axios');
@@ -49,10 +50,10 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Publisher' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2020 } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Author Id' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.TEST_BOOK_YEAR } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
 
         // Mock axios POST response
         // Should show success message
@@ -76,10 +77,10 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: `0b0000` } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.YEAR_ZERO } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
 
         // Click add book button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
@@ -99,10 +100,10 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: -1000 } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.YEAR_NEGATIVE} });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
 
         // Click add book button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
@@ -122,10 +123,10 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 22 } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.YEAR_NON_FOUR } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
 
         // Click add book button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
@@ -146,9 +147,9 @@ describe('AddBook', () => {
 
         // Set input values via the elements on the component
         fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: '' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2022 } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.TEST_BOOK_YEAR } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
 
         // Click add book button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
@@ -168,10 +169,10 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: '01234567890123456789012345678901234567890123456789' } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2022 } });
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: testConstant.TEST_TEXT_45 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: testConstant.TEST_TEXT_46 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: testConstant.TEST_BOOK_YEAR } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: testConstant.TEST_TEXT_45 } });
 
         // Click add book button on the component 
         fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
