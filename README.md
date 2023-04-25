@@ -61,25 +61,34 @@
 The main consideration when design this application was to keep it simple as this is meant to be a very simple CRUB web application. 
 <br>
 
-In the backend server, there are 2 classes: 
+In the backend server: 
 1. `database.js` class: Handles the setting up and connection with the database used in this application.
   * This acts like a singleton class that returns the same instance of the database. 
-2. `main.js` class: Handles the main logic for the CRUD operations on the database. 
+2. `commandLogic.js` class: Handles the logic for the CRUD operations on the database. 
   * Create: `POST` request is used to store a new book / author into the database.
   * Read: `GET` request is used to get all the books and authors from the database. 
   * Update: `PUT` request is used to update an entry in the data base.
   * Delete: `DELETE` request is used to update an entry in database. 
+3. `booksServer.js` and `authorsServer.js` classes that call the methods in `commandLogic` to do the CRUD operation on the respective table. 
+4. `main.js`: The main backend class.
   
 <br> 
 
-Reason for having 2 seperate classes instead of combining every into one "god backend server class":
-* Single Responsibility Principle: Each class is only required to either handle the database or CRUD operations. 
+Reason for having 2 seperate `booksServer.js` and `authorsServer.js` classes instead of combining every into one "god backend server class":
+* Single Responsibility Principle: 
+  * Each class is only required to handle CRUD operations related to its own table. 
 * Ensures Open-Closed Principle: 
-  * If there is a need to modify/enhance the database, it could be easily extended without possibly affecting other classes.
+  * If there is a need to extend either of the classes, it is possible to do so without affecting the other class.
+
+Reason for having a `commandLogic.js` class:
+* Don't Repeat Yourself Principle:
+  * This is to avoid code duplication making the code base easier to maintain.
+* Open-Closed Principle:
+  * If required, more tables and operations can be easily added in the future. without affecting existing classes.
   
 <br>
 
-Trade-offs: All the 4 CRUD operations are lumped into the `main.js` file, this is to prevent the creation of many different classes for each operation / table. Since the is a small and simple application, having a seperate file for each operation is necessary. However, if the application will be extended and the logic gets more complicated, then a possible design would be to have each class to handle each operation so that `main.js` would not be too complex. 
+Trade-offs: More files are needed. 
 
 <br>
 
