@@ -158,52 +158,52 @@ Moreover, manual testing is also done after the implementation of each frontend 
 ## Screenshots of the application
 
 #### Main Page / View All Books Page
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/main_page.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/main_page.JPG)
 
 <br>
 
 #### Add Book Page
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/add_book_page.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/add_book_page.JPG)
 
 <br>
 
 **When there is an error**
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/add_book_failure.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/add_book_failure.JPG)
 
 <br>
 
 **When added successfully**
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/add_book_success.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/add_book_success.JPG)
 
 <br>
 
 #### Update Book Page
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/update_book_page.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/update_book_page.JPG)
 
 <br>
 
 #### View All Authors Page
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/authors_page.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/authors_page.JPG)
 
 <br>
 
 #### Add Author Page
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/add_author_page.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/add_author_page.JPG)
 
 <br>
 
 **When there is an error**
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/add_author_failure.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/add_author_failure.JPG)
 
 <br>
 
 **When added successfully**
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/add_author_success.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/add_author_success.JPG)
 
 <br>
 
 #### Update Author Page
-![image](https://github.com/Py0000/simple-book-web/blob/doc/document_images/update_author_page.JPG)
+![image](https://github.com/Py0000/simple-book-web/blob/main/document_images/update_author_page.JPG)
 
 
   
