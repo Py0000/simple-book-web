@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import Card from '../../ui/Card';
-import '../../ui/View.css';
+import '../../ui/page_styles/View.css';
 import ViewButton from '../../ui/buttons/ViewButton';
 
 const ViewBook = () => {

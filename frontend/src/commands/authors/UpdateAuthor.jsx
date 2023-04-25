@@ -3,7 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import classes from '../../ui/Form.module.css';
+import classes from '../../ui/page_styles/Form.module.css';
 import FormButton from '../../ui/buttons/FormButton';
 import Modal from '../../ui/Modal';
 
