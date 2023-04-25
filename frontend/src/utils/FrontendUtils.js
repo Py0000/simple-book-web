@@ -1,5 +1,6 @@
 // Path for author database
 export const AUTHOR_PATH = "http://localhost:9000/authors";
+export const PATH_DELIMITER = "/";
 
 // Links 
 export const VIEW_AUTHOR_LINK = "/view_authors";
@@ -24,6 +25,10 @@ export const ADD_AUTHOR_PAGE_TTTLE = "Add New Author";
 export const ADD_AUTHOR_BUTTON = "Add Author";
 export const SAVE_BOOK_DETAILS = "Save Book's Details Here";
 export const WARNING_MSG = "Note: If the author already exists in our database, you won't be able to add it in, hence no visible change will be noticed!";
+
+// Related to Update Author Page
+export const UPDATE_AUTHOR_PAGE_TTTLE = "Update Existing Author";
+export const UPDATE_AUTHOR_BUTTON = "Update Author";
 
 // Back button (Used in AddAuthor and AddBook)
 export const BACK_BUTTON = "Back";
