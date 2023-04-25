@@ -4,6 +4,8 @@ import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import UpdateBook from '../commands/books/UpdateBook';
+import * as frontendConstant from "../utils/BookUtils";
+
 
 jest.mock('axios');
 
@@ -19,12 +21,12 @@ describe('UpdateBook component', () => {
             </BrowserRouter>
         );
         
-        const pageTitle = screen.getByText("Update Existing Book");
-        const titleInput = screen.getByPlaceholderText('Enter book title here');
-        const publisherInput = screen.getByPlaceholderText('Enter book publisher here');
-        const yearInput = screen.getByPlaceholderText('Enter published year here');
-        const authorInput = screen.getByPlaceholderText('Enter book author here');
-        const submitButton = screen.getByText('Update Book');
+        const pageTitle = screen.getByText(frontendConstant.UPDATE_BOOK_PAGE_TITLE);
+        const titleInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE);
+        const publisherInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER);
+        const yearInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR);
+        const authorInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID);
+        const submitButton = screen.getByText(frontendConstant.UPDATE_BOOK_BUTTON);
         
         expect(pageTitle).toBeInTheDocument();
         expect(titleInput).toBeInTheDocument();
@@ -45,16 +47,17 @@ describe('UpdateBook component', () => {
 
         await act(async () => {
             // Set input values via the elements on the component
-            fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Updated Title' } });
-            fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Updated Publisher' } });
-            fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2021 } });
-            fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Updated Author Id' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Updated Title' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Updated Publisher' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2021 } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Updated Author Id' } });
             
             // Click update book button on the component
-            fireEvent.click(getByText('Update Book'));
+            fireEvent.click(getByText(frontendConstant.UPDATE_BOOK_BUTTON));
         });
 
-        expect(axios.put).toHaveBeenCalledWith(`http://localhost:9000/books/undefined`, {
+        const path = frontendConstant.BOOK_PATH + "/undefined"
+        expect(axios.put).toHaveBeenCalledWith(path, {
             title: 'Test Updated Title',
             publisher: 'Test Updated Publisher',
             year: "2021",
@@ -70,17 +73,17 @@ describe('UpdateBook component', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Publisher' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2022 } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: '01234567890123456789012345678901234567890123456789' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Publisher' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2022 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: '01234567890123456789012345678901234567890123456789' } });
 
         // Click update book button on the component 
-        fireEvent.click(getByText('Update Book'));
+        fireEvent.click(getByText(frontendConstant.UPDATE_BOOK_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Book Author Id should not be empty and should not have more than 45 characters')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_MODAL_AUTHORID)).toBeInTheDocument();
     });
 });

@@ -23,3 +23,8 @@ export const ADD_BOOK_PAGE_TTTLE = "Add a New Book";
 export const ADD_BOOK_BUTTON = "Add Book";
 export const SAVE_AUTHOR_DETAILS = "Save Author's Details Here";
 export const BACK_BUTTON = "Back";
+
+
+// Related to Update Book page
+export const UPDATE_BOOK_PAGE_TITLE = "Update Existing Book";
+export const UPDATE_BOOK_BUTTON = "Update Book";

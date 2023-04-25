@@ -3,6 +3,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {validateText, validateYear} from '../../utils/ValidationLogic';
+import * as frontendConstant from "../../utils/BookUtils";
+import * as linkConstant from '../../utils/LinkUtils';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import FormButton from '../../ui/buttons/FormButton';
@@ -29,56 +31,48 @@ const UpdateBook = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
+
         try {
-            try {
-                // Simple Input validation
-                if (!validateText(book.title)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Book Title should not be empty and should not have more than 45 characters"
-                    });
-                    return;
-                } 
+            // Simple Input validation
+            if (!validateText(book.title)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_BOOK
+                });
+                return;
+            } 
 
-                if (!validateText(book.publisher)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Book Publisher should not be empty and should not have more than 45 characters"
-                    });
-                    return;
-                } 
+            if (!validateText(book.publisher)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_PUBLISHER
+                });
+                return;
+            } 
 
-                if (!validateYear(book.year)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Book Year should not be empty, should not be negative or zero and should have 4 digits."
-                    });
-                    return;
-                } 
+            if (!validateYear(book.year)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_YEAR
+                });
+                return;
+            } 
 
-                if (!validateText(book.authorId)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Book Author Id should not be empty and should not have more than 45 characters"
-                    });
-                    return;
-                } 
-                
-                const path = "http://localhost:9000/books/";
-                await axios.put(path + id, book);
+            if (!validateText(book.authorId)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_AUTHORID
+                });
+                return;
+            } 
+            
+            const path = frontendConstant.BOOK_PATH + linkConstant.PATH_DELIMITER
+            await axios.put(path + id, book);
 
-                // Nagivate back to home page after adding
-                const homepage = "/";
-                nagivateToPage(homepage);
-            } catch (error) {
-                const errMsg = "[Frontend] Unable to update data: "
-                console.log(errMsg + error);
-            }
-        }
-
-        catch (error) {
-            const errIdentifier = "[Frontend] ";
-            console.log(errIdentifier + error)
+            // Nagivate back to home page after adding
+            nagivateToPage(linkConstant.PATH_DELIMITER);
+        } catch (error) {
+            console.log(frontendConstant.ERROR_MSG + error);
         }
     };
 
@@ -93,12 +87,12 @@ const UpdateBook = () => {
         <div>
             {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             <div className={classes.input}>
-                <h1>Update Existing Book</h1>
-                <input type="text" placeholder='Enter book title here' onChange={handleChange} name="title"></input>
-                <input type="text" placeholder='Enter book publisher here' onChange={handleChange} name="publisher"></input>
-                <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>
-                <input type="text" placeholder='Enter book author here' onChange={handleChange} name="authorId"></input>
-                <FormButton type="submit" onClick={handleClick}>Update Book</FormButton>
+                <h1>{frontendConstant.UPDATE_BOOK_PAGE_TITLE}</h1>
+                <input type="text" placeholder={frontendConstant.PLACEHOLDER_TITLE} onChange={handleChange} name="title"></input>
+                <input type="text" placeholder={frontendConstant.PLACEHOLDER_PUBLISHER} onChange={handleChange} name="publisher"></input>
+                <input type="number" placeholder={frontendConstant.PLACEHOLDER_YEAR} onChange={handleChange} name="year"></input>
+                <input type="text" placeholder={frontendConstant.PLACEHOLDER_AUTHORID} onChange={handleChange} name="authorId"></input>
+                <FormButton type="submit" onClick={handleClick}>{frontendConstant.UPDATE_BOOK_BUTTON}</FormButton>
             </div>
         </div>
     );
