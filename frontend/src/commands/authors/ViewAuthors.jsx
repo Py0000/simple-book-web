@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Card from '../../ui/Card';
 import '../../ui/View.css';
-import ViewButton from '../../ui/ViewButton';
+import ViewButton from '../../ui/buttons/ViewButton';
 
 const ViewAuthors = () => {
     

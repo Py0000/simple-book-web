@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import classes from '../../ui/Form.module.css';
-import BackButton from '../../ui/BackButton';
-import FormButton from '../../ui/FormButton';
+import BackButton from '../../ui/buttons/BackButton';
+import FormButton from '../../ui/buttons/FormButton';
 import Modal from '../../ui/Modal';
 
 const AddBook = () => {
@@ -124,7 +124,7 @@ const AddBook = () => {
                 <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>
                 <input type="text" placeholder='Enter book author here' onChange={handleChange} name="authorId"></input>
                 <FormButton type="submit" onClick={handleClick}>Add Book</FormButton>
-                <FormButton className='add-other__button'><Link to="/add_author">Save Author's Details Here</Link></FormButton>
+                <FormButton><Link to="/add_author">Save Author's Details Here</Link></FormButton>
             </div>
             
         </div>

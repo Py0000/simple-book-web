@@ -124,6 +124,12 @@ In `AddBook.jsx` / `AddAuthor.jsx` and `UpdateBook.jsx` / `UpdateAuthor.jsx`:
 
 <br>
 
+Re-Usable Components
+* `Card`, `ViewButton`, `BackButton`, `FormButton`, `Modal` were also used in this application. This helps to prevent duplication of code and adhere to dry. 
+* 'Inheritance' was also used, for instance, `ViewButton`, `BackButton`, `FormButton` uses the `Button` component to avoid repetition of code for rendering the button element and applying the CSS classes. This approach makes it easier to maintain the code, as any changes to the button styling can be made in the Button component itself rather than in each of the button files
+
+<br>
+
 The main underlying design pattern used is Model-View-Controller (MVC) pattern:
 * The database and the backend server acts as the model that stores and maintains the data. It also updates the data displayed to the user via the View.
 * The webpage acts as the View that displays the data and interacts with the user. 

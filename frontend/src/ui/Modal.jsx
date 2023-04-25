@@ -1,5 +1,5 @@
 import Card from './Card';
-import FormButton from './FormButton';
+import FormButton from './buttons/FormButton';
 import classes from './Modal.module.css';
 
 const Modal = (props) => {

@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import classes from '../../ui/Form.module.css';
-import FormButton from '../../ui/FormButton';
+import BackButton from '../../ui/buttons/BackButton';
+import FormButton from '../../ui/buttons/FormButton';
 import Modal from '../../ui/Modal';
 import '../../ui/AddAuthor.css';
-import BackButton from '../../ui/BackButton';
+
 
 const AddAuthor = () => {
     const path = "http://localhost:9000/authors";

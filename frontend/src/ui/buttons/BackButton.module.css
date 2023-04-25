@@ -13,7 +13,8 @@
 }
 
 ._button :link,
-.button :visited{
+.button :visited,
+.button:checked {
     color: inherit;
     text-decoration: none;
 }

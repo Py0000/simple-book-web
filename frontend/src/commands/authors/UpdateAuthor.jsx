@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import classes from '../../ui/Form.module.css';
-import FormButton from '../../ui/FormButton';
+import FormButton from '../../ui/buttons/FormButton';
 import Modal from '../../ui/Modal';
 
 const UpdateAuthor = () => {
