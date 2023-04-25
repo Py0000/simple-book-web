@@ -6,7 +6,7 @@ import classes from '../../ui/Form.module.css';
 import FormButton from '../../ui/FormButton';
 import Modal from '../../ui/Modal';
 import '../../ui/AddAuthor.css';
-import '../../ui/AddBook.css';
+import BackButton from '../../ui/BackButton';
 
 const AddAuthor = () => {
     const path = "http://localhost:9000/authors";
@@ -104,13 +104,13 @@ const AddAuthor = () => {
         <div>
             {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
-            <button className='add-back__button'><Link to="/view_authors">Back</Link></button>
+            <BackButton><Link to="/view_authors">Back</Link></BackButton>
             <div className={classes.input}>
                 <h1>Add New Author</h1>
                 <input type="text" placeholder='Enter name here' onChange={handleChange} name="name"></input>
                 <input type="text" placeholder='Enter biography here' onChange={handleChange} name="biography"></input>
                 <FormButton type="submit" onClick={handleClick}>Add Author</FormButton>
-                <button className='add-other__button'><Link to="/addbook">Save Book's Details Here</Link></button>
+                <FormButton><Link to="/addbook">Save Book's Details Here</Link></FormButton>
             </div>
             <div className='add-author__remark'>
                 <p>Note: If the author already exists in our database, you won't be able to add it in, hence no visible change will be noticed!</p>
