@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import * as frontendConstant from "../../utils/AuthorUtils";
+import * as linkConstant from '../../utils/LinkUtils';
 
 import Card from '../../ui/Card';
 import '../../ui/page_styles/View.css';
@@ -46,8 +47,8 @@ const ViewAuthors = () => {
     return (
         <div className='main-view'>
             <h1>{frontendConstant.VIEW_AUTHOR_PAGE_TITLE}</h1>
-            <ViewButton><Link to={frontendConstant.ADD_AUTHOR_LINK}>{frontendConstant.ADD_AUTHOR_BUTTON_VIEW}</Link></ViewButton>
-            <ViewButton><Link to={frontendConstant.PATH_DELIMITER}>{frontendConstant.VIEW_ALL_BOOKS_BUTTON}</Link></ViewButton>
+            <ViewButton><Link to={linkConstant.ADD_AUTHOR_LINK}>{frontendConstant.ADD_AUTHOR_BUTTON_VIEW}</Link></ViewButton>
+            <ViewButton><Link to={linkConstant.PATH_DELIMITER}>{frontendConstant.VIEW_ALL_BOOKS_BUTTON}</Link></ViewButton>
             <Card className='item-view'>
                 {authors.map(author => (
                     <div className='item-item' key={author.id}>
@@ -56,7 +57,7 @@ const ViewAuthors = () => {
                             <h1>{author.name}</h1>
                             <p>{author.biography}</p>
                         </div>
-                        <button className='item-item__update'><Link to={`${frontendConstant.UPDATE_AUTHOR_LINK}/${author.id}`}>{frontendConstant.UPDATE_AUTHOR_BUTTON_VIEW}</Link></button>
+                        <button className='item-item__update'><Link to={`${linkConstant.UPDATE_AUTHOR_LINK}/${author.id}`}>{frontendConstant.UPDATE_AUTHOR_BUTTON_VIEW}</Link></button>
                         <button className='item-item__delete' onClick={()=>handleDelete(author.id)}>{frontendConstant.DELETE_AUTHOR_BUTTON_VIEW}</button>
                     </div>    
                 ))}

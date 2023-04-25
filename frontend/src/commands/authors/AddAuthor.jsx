@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {validateText, validateBiography} from '../../utils/ValidationLogic';
 import * as frontendConstant from '../../utils/AuthorUtils';
+import * as linkConstant from '../../utils/LinkUtils';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import BackButton from '../../ui/buttons/BackButton';
@@ -75,13 +76,13 @@ const AddAuthor = () => {
         <div>
             {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
-            <BackButton><Link to={frontendConstant.VIEW_AUTHOR_LINK}>{frontendConstant.BACK_BUTTON}</Link></BackButton>
+            <BackButton><Link to={linkConstant.VIEW_AUTHOR_LINK}>{frontendConstant.BACK_BUTTON}</Link></BackButton>
             <div className={classes.input}>
                 <h1>{frontendConstant.ADD_AUTHOR_PAGE_TTTLE}</h1>
                 <input type="text" placeholder={frontendConstant.PLACEHOLDER_NAME} onChange={handleChange} name="name"></input>
                 <input type="text" placeholder={frontendConstant.PLACEHOLDER_BIO} onChange={handleChange} name="biography"></input>
                 <FormButton type="submit" onClick={handleClick}>{frontendConstant.ADD_AUTHOR_BUTTON}</FormButton>
-                <FormButton><Link to={frontendConstant.ADD_BOOK_LINK}>{frontendConstant.SAVE_BOOK_DETAILS}</Link></FormButton>
+                <FormButton><Link to={linkConstant.ADD_BOOK_LINK}>{frontendConstant.SAVE_BOOK_DETAILS}</Link></FormButton>
             </div>
             <div className='add-author__remark'>
                 <p>{frontendConstant.WARNING_MSG}</p>

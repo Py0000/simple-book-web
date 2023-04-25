@@ -2,11 +2,6 @@
 export const AUTHOR_PATH = "http://localhost:9000/authors";
 export const PATH_DELIMITER = "/";
 
-// Links 
-export const VIEW_AUTHOR_LINK = "/view_authors";
-export const ADD_BOOK_LINK = "/addbook";
-export const ADD_AUTHOR_LINK = "/add_author";
-export const UPDATE_AUTHOR_LINK = "/update_author";
 
 // Forms placeholders
 export const PLACEHOLDER_NAME = 'Enter name here';
@@ -19,7 +14,7 @@ export const ERROR_AUTHOR_BIO = "Author biography should not be empty and should
 
 
 // Related to status update modal
-export const STATUS_MODAL_TITLE = "Status Update";
+export const STATUS_MODAL_TITLE = "Add Author Status";
 export const ERROR_MSG = "Unexpected Error Occurred. \n";
 
 // Related to View Author Page
@@ -34,10 +29,9 @@ export const ADD_AUTHOR_PAGE_TTTLE = "Add New Author";
 export const ADD_AUTHOR_BUTTON = "Add Author";
 export const SAVE_BOOK_DETAILS = "Save Book's Details Here";
 export const WARNING_MSG = "Note: If the author already exists in our database, you won't be able to add it in, hence no visible change will be noticed!";
+export const BACK_BUTTON = "Back";
 
 // Related to Update Author Page
 export const UPDATE_AUTHOR_PAGE_TTTLE = "Update Existing Author";
 export const UPDATE_AUTHOR_BUTTON = "Update Author";
 
-// Back button (Used in AddAuthor and AddBook)
-export const BACK_BUTTON = "Back";

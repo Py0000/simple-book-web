@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import AddBook from '../commands/books/AddBook';
+import * as frontendConstant from "../utils/BookUtils";
 
 // Mock the actual functionality of axios during testing
 jest.mock('axios');
@@ -20,14 +21,14 @@ describe('AddBook', () => {
             </BrowserRouter>
         );
         
-        const pageTitle = screen.getByText("Add a New Book");
-        const titleInput = screen.getByPlaceholderText('Enter book title here');
-        const publisherInput = screen.getByPlaceholderText('Enter book publisher here');
-        const yearInput = screen.getByPlaceholderText('Enter published year here');
-        const authorInput = screen.getByPlaceholderText('Enter book author here');
-        const submitButton = screen.getByText('Add Book');
-        const addAuthorButton = screen.getByText("Save Author's Details Here");
-        const backButton = screen.getByText("Back");
+        const pageTitle = screen.getByText(frontendConstant.ADD_BOOK_PAGE_TTTLE);
+        const titleInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE);
+        const publisherInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER);
+        const yearInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR);
+        const authorInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID);
+        const submitButton = screen.getByText(frontendConstant.ADD_BOOK_BUTTON);
+        const addAuthorButton = screen.getByText(frontendConstant.SAVE_AUTHOR_DETAILS);
+        const backButton = screen.getByText(frontendConstant.BACK_BUTTON);
         
         expect(pageTitle).toBeInTheDocument();
         expect(titleInput).toBeInTheDocument();
@@ -48,21 +49,21 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Publisher' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2020 } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Author Id' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Publisher' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2020 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Author Id' } });
 
         // Mock axios POST response
         // Should show success message
         axios.post.mockResolvedValue({ data: 'Book added successfully' });
 
         // Click add book button on the component 
-        fireEvent.click(getByText('Add Book'));
+        fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
 
         // Wait for the status modal to appear 
         // Should show success message
-        await waitFor(() => expect(screen.getByText('Added Book Status')).toBeInTheDocument());
+        await waitFor(() => expect(screen.getByText(frontendConstant.STATUS_MODAL_TITLE)).toBeInTheDocument());
         expect(screen.getByText('Book added successfully')).toBeInTheDocument();
     });
 
@@ -75,18 +76,18 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: `0b0000` } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: `0b0000` } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
-        fireEvent.click(getByText('Add Book'));
+        fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Book Year should not be empty, should not be negative or zero and should have 4 digits.')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_MODAL_YEAR)).toBeInTheDocument();
     });
 
     test('Test error if input year is negative', async () => {
@@ -98,18 +99,18 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: -1000 } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: -1000 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
-        fireEvent.click(getByText('Add Book'));
+        fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Book Year should not be empty, should not be negative or zero and should have 4 digits.')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_MODAL_YEAR)).toBeInTheDocument();
     });
 
     test('Test error if input year does not have 4 digits', async () => {
@@ -121,18 +122,18 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 22 } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 22 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
-        fireEvent.click(getByText('Add Book'));
+        fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Book Year should not be empty, should not be negative or zero and should have 4 digits.')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_MODAL_YEAR)).toBeInTheDocument();
     });
 
     test('Test error if text-based input is null', async () => {
@@ -144,18 +145,18 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: '' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2022 } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: '' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2022 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
-        fireEvent.click(getByText('Add Book'));
+        fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Book Title should not be empty and should not have more than 45 characters')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_MODAL_BOOK)).toBeInTheDocument();
     });
 
     test('Test error if text-based input is exceeds limit', async () => {
@@ -167,17 +168,17 @@ describe('AddBook', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter book title here'), { target: { value: 'Test Title' } });
-        fireEvent.change(getByPlaceholderText('Enter book publisher here'), { target: { value: '01234567890123456789012345678901234567890123456789' } });
-        fireEvent.change(getByPlaceholderText('Enter published year here'), { target: { value: 2022 } });
-        fireEvent.change(getByPlaceholderText('Enter book author here'), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_TITLE), { target: { value: 'Test Title' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_PUBLISHER), { target: { value: '01234567890123456789012345678901234567890123456789' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_YEAR), { target: { value: 2022 } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_AUTHORID), { target: { value: 'Test Title' } });
 
         // Click add book button on the component 
-        fireEvent.click(getByText('Add Book'));
+        fireEvent.click(getByText(frontendConstant.ADD_BOOK_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Book Publisher should not be empty and should not have more than 45 characters')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_MODAL_PUBLISHER)).toBeInTheDocument();
     });
 });

@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {validateText, validateBiography} from '../../utils/ValidationLogic';
 import * as frontendConstant from "../../utils/AuthorUtils";
+import * as linkConstant from '../../utils/LinkUtils';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import FormButton from '../../ui/buttons/FormButton';
@@ -50,7 +51,7 @@ const UpdateAuthor = () => {
             await axios.put(path + id, author);
 
             // Nagivate back to home page after adding
-            nagivateToPage(frontendConstant.VIEW_AUTHOR_LINK);
+            nagivateToPage(linkConstant.VIEW_AUTHOR_LINK);
         } catch (error) {
             console.log(frontendConstant.ERROR_MSG + error);
         }
