@@ -1,11 +1,13 @@
 // Path for book database
 export const BOOK_PATH = "http://localhost:9000/books";
 
+
 // Forms placeholders
 export const PLACEHOLDER_TITLE = 'Enter book title here' ;
 export const PLACEHOLDER_PUBLISHER = 'Enter book publisher here';
 export const PLACEHOLDER_YEAR = 'Enter published year here';
 export const PLACEHOLDER_AUTHORID = 'Enter book author here';
+
 
 // Related to Input validation modal
 export const ERROR_MODAL_TITLE = "Invalid Book";
@@ -14,9 +16,18 @@ export const ERROR_MODAL_PUBLISHER = "Book Publisher should not be empty and sho
 export const ERROR_MODAL_YEAR = "Book Year should not be empty, should not be negative or zero and should have 4 digits";
 export const ERROR_MODAL_AUTHORID = "Book Author Id should not be empty and should not have more than 45 characters";
 
+
 // Related to status update modal
 export const STATUS_MODAL_TITLE = "Added Book Status";
 export const ERROR_MSG = "Unexpected Error Occurred. \n";
+
+
+// Related to View page
+export const VIEW_BOOK_PAGE_TITLE = "Simple CRUD Book Application";
+export const ALL_AUTHORS_BUTTON = "View All Authors";
+export const UPDATE_BUTTON_VIEW = "Update";
+export const DELETE_BUTTON_VIEW = "Delete";
+
 
 // Related to Add Book page
 export const ADD_BOOK_PAGE_TTTLE = "Add a New Book";
