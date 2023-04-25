@@ -16,6 +16,7 @@
 **Step 4:** Open a terminal of your choice, change your working directory to `backend`. 
 
 **Step 5:** Enter the following command: `npm start` 
+  * Ensure that you do not have processes running on `localhost port 9000`
   * ***Note: If you cannot connect to the database:***
     * Go to `backend` folder.
     * Go to `database.js`.
@@ -34,6 +35,7 @@
   * ***Note: Make sure you do not close the one opened in step 5***
 
 **Step 7:** Enter the following command: `npm start`
+  * Ensure that you do not have processes running on `localhost port 3000`
   * ***Note: If you see this line appearing on your terminal (`'react-scripts' is not recognized as an internal or external command`), do the following:***
     * `npm install react-scripts --save`
     * `npm start`
