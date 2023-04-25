@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {validateText, validateBiography} from '../../utils/ValidationLogic';
-import * as frontendConstant from '../../utils/FrontendUtils';
+import * as frontendConstant from '../../utils/AuthorUtils';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import BackButton from '../../ui/buttons/BackButton';

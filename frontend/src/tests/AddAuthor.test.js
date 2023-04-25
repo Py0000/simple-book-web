@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios';
 import AddAuthor from '../commands/authors/AddAuthor';
-import * as frontendConstant from "../utils/FrontendUtils";
+import * as frontendConstant from "../utils/AuthorUtils";
 
 jest.mock('axios');
 

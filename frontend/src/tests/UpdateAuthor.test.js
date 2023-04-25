@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import UpdateAuthor from '../commands/authors/UpdateAuthor';
-import * as frontendConstant from "../utils/FrontendUtils";
+import * as frontendConstant from "../utils/AuthorUtils";
 
 jest.mock('axios');
 

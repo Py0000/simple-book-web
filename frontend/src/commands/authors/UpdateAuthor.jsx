@@ -3,7 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {validateText, validateBiography} from '../../utils/ValidationLogic';
-import * as frontendConstant from "../../utils/FrontendUtils";
+import * as frontendConstant from "../../utils/AuthorUtils";
 
 import classes from '../../ui/page_styles/Form.module.css';
 import FormButton from '../../ui/buttons/FormButton';
