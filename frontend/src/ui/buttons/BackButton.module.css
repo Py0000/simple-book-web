@@ -3,7 +3,7 @@
     cursor: pointer;
     padding: 1rem;
     border: 1px solid black;
-    background-color: #101d6b;
+    background-color: #0e387a;
     color: white;
     border-radius: 12px;
     width: auto;
@@ -12,9 +12,8 @@
     margin-right: 15px;
 }
 
-._button :link,
-.button :visited,
-.button:checked {
+.button :link,
+.button :visited{
     color: inherit;
     text-decoration: none;
 }
