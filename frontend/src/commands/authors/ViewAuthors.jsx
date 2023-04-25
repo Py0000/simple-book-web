@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Card from '../../ui/Card';
 import '../../ui/View.css';
+import ViewButton from '../../ui/ViewButton';
 
 const ViewAuthors = () => {
     
@@ -49,8 +50,8 @@ const ViewAuthors = () => {
     return (
         <div className='main-view'>
             <h1>Authors in Simple CRUD Book Application</h1>
-            <button className='add-item__button'><Link to="/add_author">Add Authors</Link></button>
-            <button className='view-others__button'><Link to="/">View All Books</Link></button>
+            <ViewButton><Link to="/add_author">Add Authors</Link></ViewButton>
+            <ViewButton><Link to="/">View All Books</Link></ViewButton>
             <Card className='item-view'>
                 {authors.map(author => (
                     <div className='item-item' key={author.id}>

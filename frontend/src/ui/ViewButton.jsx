@@ -1,6 +1,6 @@
-import classes from './FormButton.module.css';
+import classes from './ViewButton.module.css';
 
-const FormButton = (props) => {
+const ViewButton = (props) => {
   return (
     <button
       className={classes.button}
@@ -12,4 +12,4 @@ const FormButton = (props) => {
   );
 };
 
-export default FormButton;
+export default ViewButton;
