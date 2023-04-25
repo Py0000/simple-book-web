@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import * as frontendConstant from "../../utils/BookUtils";
+import * as linkConstant from '../../utils/LinkUtils';
 
 import Card from '../../ui/Card';
-import '../../ui/View.css';
+import '../../ui/page_styles/View.css';
+import ViewButton from '../../ui/buttons/ViewButton';
 
 const ViewBook = () => {
     
@@ -17,14 +20,13 @@ const ViewBook = () => {
         const getBooks = async() => {
             try {
                 // need to await as it is an async function
-                const path = "http://localhost:9000/books";
-                const result = await axios.get(path);
+                
+                const result = await axios.get(frontendConstant.BOOK_PATH);
                 displayBooks(result.data)
             }
 
             catch (error) {
-                const errMsg = "[Frontend] Error retrieving data from backend. \n";
-                console.log(errMsg + error)
+                console.log(frontendConstant.ERROR_MSG + error)
             }
         };
 
@@ -35,22 +37,21 @@ const ViewBook = () => {
     // Deleting book from database
     const handleDelete = async (id)=> {
         try {
-            const path = "http://localhost:9000/books/";
+            const path = frontendConstant.BOOK_PATH + linkConstant.PATH_DELIMITER;
             await axios.delete(path + id);
             window.location.reload();
         }
         catch (err) {
-            const errIdentifier = "[Frontend] ";
-            console.log(errIdentifier + err);
+            console.log(frontendConstant.ERROR_MSG + err);
         }
     }
     
 
     return (
         <div className='main-view'>
-            <h1>Simple CRUD Book Application</h1>
-            <button className='add-item__button'><Link to="/addbook">Add Book</Link></button>
-            <button className='view-others__button'><Link to="/view_authors">View All Authors</Link></button>
+            <h1>{frontendConstant.VIEW_BOOK_PAGE_TITLE}</h1>
+            <ViewButton><Link to={linkConstant.ADD_BOOK_LINK}>{frontendConstant.ADD_BOOK_BUTTON}</Link></ViewButton>
+            <ViewButton><Link to={linkConstant.VIEW_AUTHOR_LINK}>{frontendConstant.ALL_AUTHORS_BUTTON}</Link></ViewButton>
             <Card className='item-view'>
                 {books.map(book => (
                     <div className='item-item' key={book.id}>
@@ -60,8 +61,8 @@ const ViewBook = () => {
                             <p>{book.publisher}</p>
                             <p>{book.authorId}</p>
                         </div>
-                        <button className='item-item__update'><Link to={`/updatebook/${book.id}`}>Update</Link></button>
-                        <button className='item-item__delete' onClick={()=>handleDelete(book.id)}>Delete</button>  
+                        <button className='item-item__update'><Link to={`${linkConstant.UPDATE_BOOK_LINK}/${book.id}`}>{frontendConstant.UPDATE_BUTTON_VIEW}</Link></button>
+                        <button className='item-item__delete' onClick={()=>handleDelete(book.id)}>{frontendConstant.DELETE_BUTTON_VIEW}</button>  
                     </div>    
                 ))}
             </Card>

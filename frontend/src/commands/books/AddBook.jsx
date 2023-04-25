@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {validateText, validateYear} from '../../utils/ValidationLogic';
+import * as frontendConstant from "../../utils/BookUtils";
+import * as linkConstant from '../../utils/LinkUtils';
 
-import classes from '../../ui/Form.module.css';
-import FormButton from '../../ui/FormButton';
+import classes from '../../ui/page_styles/Form.module.css';
+import BackButton from '../../ui/buttons/BackButton';
+import FormButton from '../../ui/buttons/FormButton';
 import Modal from '../../ui/Modal';
-import '../../ui/AddBook.css';
 
 const AddBook = () => {
-    const path = "http://localhost:9000/books";
-
     const [book, setBook] = useState({
         title: "",
         publisher: "",
@@ -21,23 +22,6 @@ const AddBook = () => {
 
     const [status, setStatus] = useState();
     
-    const isValidInput = () => {
-        let isTitleEmpty = book.title.trim().length === 0;
-        let isPublisherEmpty = book.publisher.trim().length === 0;
-        let isAuthorIdEmpty = book.authorId.trim().length === 0;
-
-        // Check that year is non-null, it is positve and has 4 digits
-        let isYearValid = book.year != null && book.year > 0 && (Math.log(book.year) * Math.LOG10E + 1 | 0) === 4;
-
-        let isInputValid = !isTitleEmpty && !isPublisherEmpty && !isAuthorIdEmpty && isYearValid;
-        return isInputValid;
-    }
-
-    const isTooLong = (desc, limit) => {
-        let descLength = desc.trim().length;
-        return descLength > limit;
-    }
-
 
     const handleChange = (e) => {
         setBook((prev) => (
@@ -48,58 +32,51 @@ const AddBook = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
+
         try {
-            try {
-                // Simple Input validation
-                if (!isValidInput()) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "One or more input is empty / invalid!"
-                    });
-                    return;
-                } 
-
-                if (isTooLong(book.title, 45)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Title cannot be more than 45 characters long!"
-                    });
-                    return;
-                } 
-
-                if (isTooLong(book.publisher, 45)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Publisher cannot be more than 45 characters long!"
-                    });
-                    return;
-                } 
-
-                if (isTooLong(book.authorId, 45)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "AuthorId cannot be more than 45 characters long!"
-                    });
-                    return;
-                } 
-
-                // Input valid, add to database
-                let res = await axios.post(path, book);
-                
-                setStatus({
-                    title: "Added Book Status",
-                    message: res.data
+            // Simple Input validation
+            if (!validateText(book.title)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_BOOK
                 });
+                return;
+            } 
 
-            } catch (error) {
-                const errMsg = "[Frontend] Error adding data to backend. \n";
-                console.log(errMsg + error);
-            }
-        }
+            if (!validateText(book.publisher)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_PUBLISHER
+                });
+                return;
+            } 
 
-        catch (error) {
-            const errIdentifier = "[Frontend] ";
-            console.log(errIdentifier +  error);
+            if (!validateYear(book.year)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_YEAR
+                });
+                return;
+            } 
+
+            if (!validateText(book.authorId)) {
+                setError({
+                    title: frontendConstant.ERROR_MODAL_TITLE,
+                    message: frontendConstant.ERROR_MODAL_AUTHORID
+                });
+                return;
+            } 
+
+            // Input valid, add to database
+            let res = await axios.post(frontendConstant.BOOK_PATH, book);
+            
+            setStatus({
+                title: frontendConstant.STATUS_MODAL_TITLE,
+                message: res.data
+            });
+
+        } catch (error) {
+            console.log(frontendConstant.ERROR_MSG + error);
         }
     };
 
@@ -116,15 +93,15 @@ const AddBook = () => {
         <div>
             {error && <Modal title={error.title} message={error.message} handleAction={errorHandler}></Modal>}
             {status && <Modal title={status.title} message={status.message} handleAction={statusHandler}></Modal>}
-            <button className='add-back__button'><Link to="/">Back</Link></button>
+            <BackButton><Link to={linkConstant.PATH_DELIMITER}>{frontendConstant.BACK_BUTTON}</Link></BackButton>
             <div className={classes.input}>
-                <h1>Add a New Book</h1>
-                <input type="text" placeholder='Enter book title here' onChange={handleChange} name="title"></input>
-                <input type="text" placeholder='Enter book publisher here' onChange={handleChange} name="publisher"></input>
-                <input type="number" placeholder='Enter published year here' onChange={handleChange} name="year"></input>
-                <input type="text" placeholder='Enter book author here' onChange={handleChange} name="authorId"></input>
-                <FormButton type="submit" onClick={handleClick}>Add Book</FormButton>
-                <button className='add-other__button'><Link to="/add_author">Save Author's Details Here</Link></button>
+                <h1>{frontendConstant.ADD_BOOK_PAGE_TTTLE}</h1>
+                <input type="text" placeholder={frontendConstant.PLACEHOLDER_TITLE} onChange={handleChange} name="title"></input>
+                <input type="text" placeholder={frontendConstant.PLACEHOLDER_PUBLISHER} onChange={handleChange} name="publisher"></input>
+                <input type="number" placeholder={frontendConstant.PLACEHOLDER_YEAR} onChange={handleChange} name="year"></input>
+                <input type="text" placeholder={frontendConstant.PLACEHOLDER_AUTHORID} onChange={handleChange} name="authorId"></input>
+                <FormButton type="submit" onClick={handleClick}>{frontendConstant.ADD_BOOK_BUTTON}</FormButton>
+                <FormButton><Link to={linkConstant.ADD_AUTHOR_LINK}>{frontendConstant.SAVE_AUTHOR_DETAILS}</Link></FormButton>
             </div>
             
         </div>

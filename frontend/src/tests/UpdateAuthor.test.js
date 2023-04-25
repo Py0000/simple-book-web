@@ -4,8 +4,10 @@ import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import UpdateAuthor from '../commands/authors/UpdateAuthor';
+import * as frontendConstant from "../utils/AuthorUtils";
 
 jest.mock('axios');
+
 
 describe('UpdateAuthor component', () => {
     beforeEach(() => {
@@ -19,10 +21,10 @@ describe('UpdateAuthor component', () => {
             </BrowserRouter>
         );
         
-        const pageTitle = screen.getByText("Update Existing Author");
-        const nameInput = screen.getByPlaceholderText('Enter name here');
-        const biographyInput = screen.getByPlaceholderText('Enter biography here');
-        const submitButton = screen.getByText('Update Author');
+        const pageTitle = screen.getByText(frontendConstant.UPDATE_AUTHOR_PAGE_TTTLE);
+        const nameInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME);
+        const biographyInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO);
+        const submitButton = screen.getByText(frontendConstant.UPDATE_AUTHOR_BUTTON);
         
         expect(pageTitle).toBeInTheDocument();
         expect(nameInput).toBeInTheDocument();
@@ -41,14 +43,15 @@ describe('UpdateAuthor component', () => {
 
         await act(async () => {
             // Set input values via the elements on the component
-            fireEvent.change(getByPlaceholderText('Enter name here'), { target: { value: 'Test Updated Name' } });
-            fireEvent.change(getByPlaceholderText('Enter biography here'), { target: { value: 'Test Updated Biography' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Updated Name' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: 'Test Updated Biography' } });
             
             // Click update author button on the component
-            fireEvent.click(getByText('Update Author'));
+            fireEvent.click(getByText(frontendConstant.UPDATE_AUTHOR_BUTTON));
         });
 
-        expect(axios.put).toHaveBeenCalledWith(`http://localhost:9000/authors/undefined`, {
+        const path = frontendConstant.AUTHOR_PATH + frontendConstant.PATH_DELIMITER + `undefined`;
+        expect(axios.put).toHaveBeenCalledWith(path , {
             name: 'Test Updated Name',
             biography: 'Test Updated Biography',
         });
@@ -62,16 +65,16 @@ describe('UpdateAuthor component', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText('Enter name here'), { target: { value: 'Test Updated Name' } });
-        fireEvent.change(getByPlaceholderText('Enter biography here'), { target: { value: '' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Updated Name' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: '' } });
             
 
         // Click update author button on the component 
-        fireEvent.click(getByText('Update Author'));
+        fireEvent.click(getByText(frontendConstant.UPDATE_AUTHOR_BUTTON));
 
         // Wait for the error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_AUTHOR_BIO)).toBeInTheDocument();
     });
 });

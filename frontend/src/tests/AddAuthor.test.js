@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios';
 import AddAuthor from '../commands/authors/AddAuthor';
+import * as frontendConstant from "../utils/AuthorUtils";
 
 jest.mock('axios');
 
@@ -18,13 +19,13 @@ describe('AddAuthor', () => {
             </BrowserRouter>
         );
         
-        const pageTitle = screen.getByText("Add New Author");
-        const nameInput = screen.getByPlaceholderText('Enter name here');
-        const biographyInput = screen.getByPlaceholderText('Enter biography here');
-        const submitButton = screen.getByText('Add Author');
-        const addBookButton = screen.getByText("Save Book's Details Here");
-        const warningText = screen.getByText("Note: If the author already exists in our database, you won't be able to add it in, hence no visible change will be noticed!");
-        const backButton = screen.getByText("Back");
+        const pageTitle = screen.getByText(frontendConstant.ADD_AUTHOR_PAGE_TTTLE);
+        const nameInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME);
+        const biographyInput = screen.getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO);
+        const submitButton = screen.getByText(frontendConstant.ADD_AUTHOR_BUTTON);
+        const addBookButton = screen.getByText(frontendConstant.SAVE_BOOK_DETAILS);
+        const warningText = screen.getByText(frontendConstant.WARNING_MSG);
+        const backButton = screen.getByText(frontendConstant.BACK_BUTTON);
 
         expect(pageTitle).toBeInTheDocument();
         expect(nameInput).toBeInTheDocument();
@@ -44,18 +45,18 @@ describe('AddAuthor', () => {
         );
 
         // Set input values
-        fireEvent.change(getByPlaceholderText('Enter name here'), { target: { value: 'Test Author Name' } });
-        fireEvent.change(getByPlaceholderText('Enter biography here'), { target: { value: 'Test Author Biography' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Author Name' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: 'Test Author Biography' } });
 
         // Mock axios POST response
         // Should show success message
         axios.post.mockResolvedValue({ data: 'Author added successfully' });
 
         // Click add author button on the component 
-        fireEvent.click(getByText('Add Author'));
+        fireEvent.click(getByText(frontendConstant.ADD_AUTHOR_BUTTON));
 
         // Wait for the status modal to appear
-        await waitFor(() => expect(screen.getByText('Added Author Status')).toBeInTheDocument());
+        await waitFor(() => expect(screen.getByText(frontendConstant.STATUS_MODAL_TITLE)).toBeInTheDocument());
         expect(screen.getByText('Author added successfully')).toBeInTheDocument();
     });
 
@@ -68,16 +69,16 @@ describe('AddAuthor', () => {
         );
 
         // Set invalid input values
-        fireEvent.change(getByPlaceholderText('Enter name here'), { target: { value: '' } });
-        fireEvent.change(getByPlaceholderText('Enter biography here'), { target: { value: 'Test Author Biography' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: '' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: 'Test Author Biography' } });
 
         // Click add author button on the component 
-        fireEvent.click(getByText('Add Author'));
+        fireEvent.click(getByText(frontendConstant.ADD_AUTHOR_BUTTON));
 
         // Wait for error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_AUTHOR_NAME)).toBeInTheDocument();
     });
 
     test('Test error if input exceeds length limit', async () => {
@@ -89,15 +90,15 @@ describe('AddAuthor', () => {
         );
 
         // Set invalid input values
-        fireEvent.change(getByPlaceholderText('Enter name here'), { target: { value: 'Test Author' } });
-        fireEvent.change(getByPlaceholderText('Enter biography here'), { target: { value: '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678902' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Author' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678902' } });
 
         // Click add author button on the component 
-        fireEvent.click(getByText('Add Author'));
+        fireEvent.click(getByText(frontendConstant.ADD_AUTHOR_BUTTON));
 
         // Wait for error modal to appear
         // Should show error message
-        await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Biography cannot be more than 200 characters long!')).toBeInTheDocument();
+        await waitFor(() => expect(screen.getByText(frontendConstant.ERROR_MODAL_TITLE)).toBeInTheDocument());
+        expect(screen.getByText(frontendConstant.ERROR_AUTHOR_BIO)).toBeInTheDocument();
     }); 
 });

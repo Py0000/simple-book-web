@@ -61,25 +61,34 @@
 The main consideration when design this application was to keep it simple as this is meant to be a very simple CRUB web application. 
 <br>
 
-In the backend server, there are 2 classes: 
+In the backend server: 
 1. `database.js` class: Handles the setting up and connection with the database used in this application.
   * This acts like a singleton class that returns the same instance of the database. 
-2. `main.js` class: Handles the main logic for the CRUD operations on the database. 
+2. `commandLogic.js` class: Handles the logic for the CRUD operations on the database. 
   * Create: `POST` request is used to store a new book / author into the database.
   * Read: `GET` request is used to get all the books and authors from the database. 
   * Update: `PUT` request is used to update an entry in the data base.
   * Delete: `DELETE` request is used to update an entry in database. 
+3. `booksServer.js` and `authorsServer.js` classes that call the methods in `commandLogic` to do the CRUD operation on the respective table. 
+4. `main.js`: The main backend class.
   
 <br> 
 
-Reason for having 2 seperate classes instead of combining every into one "god backend server class":
-* Single Responsibility Principle: Each class is only required to either handle the database or CRUD operations. 
+Reason for having 2 seperate `booksServer.js` and `authorsServer.js` classes instead of combining every into one "god backend server class":
+* Single Responsibility Principle: 
+  * Each class is only required to handle CRUD operations related to its own table. 
 * Ensures Open-Closed Principle: 
-  * If there is a need to modify/enhance the database, it could be easily extended without possibly affecting other classes.
+  * If there is a need to extend either of the classes, it is possible to do so without affecting the other class.
+
+Reason for having a `commandLogic.js` class:
+* Don't Repeat Yourself Principle:
+  * This is to avoid code duplication making the code base easier to maintain.
+* Open-Closed Principle:
+  * If required, more tables and operations can be easily added in the future. without affecting existing classes.
   
 <br>
 
-Trade-offs: All the 4 CRUD operations are lumped into the `main.js` file, this is to prevent the creation of many different classes for each operation / table. Since the is a small and simple application, having a seperate file for each operation is necessary. However, if the application will be extended and the logic gets more complicated, then a possible design would be to have each class to handle each operation so that `main.js` would not be too complex. 
+Trade-offs: More files are needed. 
 
 <br>
 
@@ -112,6 +121,13 @@ In `AddBook.jsx` / `AddAuthor.jsx` and `UpdateBook.jsx` / `UpdateAuthor.jsx`:
 * For `UpdateBook.jsx` / `UpdateAuthor.jsx`, after the user has successfully update the item, it would bring the user back to the main display page. 
 * For `AddBook.jsx` / `AddAuthor.jsx`, unlike updating, a modal would appear to inform the user that the item has been added successfully and the user would be able to easily dismiss by clicking the `Ok` button or anywhere in the page and remain on the same page. The reason for this is because when adding a new book / author, there is a high probability that the author / book is not in the database yet, hence the user will want to add them corresponding data in. 
 * For updating, the corresponding book / author would already have been in the database and it is assumed that a user would need to update both data at the same time.
+
+<br>
+
+Re-Usable Components
+* `Card`, `ViewButton`, `BackButton`, `FormButton`, `Modal` were also used in this application. This helps to prevent duplication of code and adhere to dry. 
+* 'Inheritance' was also used, for instance, `ViewButton`, `BackButton`, `FormButton` uses the `Button` component to avoid repetition of code for rendering the button element and applying the CSS classes. This approach makes it easier to maintain the code, as any changes to the button styling can be made in the Button component itself rather than in each of the button files
+* There is also a `utils` folder than contains functions / variables that is applicable for many of the classes in the application, which helps to reduce duplication and makes the code easier to maintain. Any changes required can be made directly in the `utils` files and it will be reflected across the whole application. 
 
 <br>
 

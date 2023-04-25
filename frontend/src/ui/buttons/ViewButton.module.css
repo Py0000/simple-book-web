@@ -1,0 +1,27 @@
+.button{
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid #0e387a;
+    background-color: #9fafca;
+    color: #00003f;
+    border-radius: 12px;
+    width: 250px;
+    max-width: 90%;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.button :link,
+.button :visited,
+.button :checked{
+    text-decoration: none;
+    color: inherit;
+}
+
+.button:hover,
+.button:active {
+    background: #0e387a;;
+    border-color: #0e387a;;
+    color: whitesmoke;
+  }

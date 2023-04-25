@@ -5,7 +5,6 @@ const USER_NAME = "root";
 const PASSWORD = "";
 const DB_NAME = "simple-book-web";
 
-
 // Set up the database needed for the application
 const db = mysql.createConnection({
     host: HOST_NAME,
