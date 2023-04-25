@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {validateText, validateYear} from '../../utils/ValidationLogic';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import BackButton from '../../ui/buttons/BackButton';
@@ -21,23 +22,6 @@ const AddBook = () => {
 
     const [status, setStatus] = useState();
     
-    const isValidInput = () => {
-        let isTitleEmpty = book.title.trim().length === 0;
-        let isPublisherEmpty = book.publisher.trim().length === 0;
-        let isAuthorIdEmpty = book.authorId.trim().length === 0;
-
-        // Check that year is non-null, it is positve and has 4 digits
-        let isYearValid = book.year != null && book.year > 0 && (Math.log(book.year) * Math.LOG10E + 1 | 0) === 4;
-
-        let isInputValid = !isTitleEmpty && !isPublisherEmpty && !isAuthorIdEmpty && isYearValid;
-        return isInputValid;
-    }
-
-    const isTooLong = (desc, limit) => {
-        let descLength = desc.trim().length;
-        return descLength > limit;
-    }
-
 
     const handleChange = (e) => {
         setBook((prev) => (
@@ -51,34 +35,34 @@ const AddBook = () => {
         try {
             try {
                 // Simple Input validation
-                if (!isValidInput()) {
+                if (!validateText(book.title)) {
                     setError({
                         title: "Invalid Input",
-                        message: "One or more input is empty / invalid!"
+                        message: "Book Title should not be empty and should not have more than 45 characters"
                     });
                     return;
                 } 
 
-                if (isTooLong(book.title, 45)) {
+                if (!validateText(book.publisher)) {
                     setError({
                         title: "Invalid Input",
-                        message: "Title cannot be more than 45 characters long!"
+                        message: "Book Publisher should not be empty and should not have more than 45 characters"
                     });
                     return;
                 } 
 
-                if (isTooLong(book.publisher, 45)) {
+                if (!validateYear(book.year)) {
                     setError({
                         title: "Invalid Input",
-                        message: "Publisher cannot be more than 45 characters long!"
+                        message: "Book Year should not be empty, should not be negative or zero and should have 4 digits."
                     });
                     return;
                 } 
 
-                if (isTooLong(book.authorId, 45)) {
+                if (!validateText(book.authorId)) {
                     setError({
                         title: "Invalid Input",
-                        message: "AuthorId cannot be more than 45 characters long!"
+                        message: "Book Author Id should not be empty and should not have more than 45 characters"
                     });
                     return;
                 } 

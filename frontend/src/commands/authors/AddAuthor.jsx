@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import {validateText, validateBiography} from '../../utils/ValidationLogic';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import BackButton from '../../ui/buttons/BackButton';
@@ -48,29 +49,21 @@ const AddAuthor = () => {
         try {
             try {
                 // Simple Input validation
-                if (!isValidEmpty()) {
+                if (!validateText(author.name)) {
                     setError({
                         title: "Invalid Input",
-                        message: "One or more input is empty / invalid!"
+                        message: "Author name should not be empty and should not have more than 45 characters"
                     });
                     return;
-                } 
+                }
 
-                if (isTooLong(author.name, 45)) {
+                if (!validateBiography(author.biography)) {
                     setError({
                         title: "Invalid Input",
-                        message: "Name cannot be more than 45 characters long!"
+                        message: "Author biography should not be empty and should not have more than 200 characters"
                     });
                     return;
-                } 
-
-                if (isTooLong(author.biography, 200)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Biography cannot be more than 200 characters long!"
-                    });
-                    return;
-                } 
+                }
 
                 // Input valid, add to database
                 let res = await axios.post(path, author);

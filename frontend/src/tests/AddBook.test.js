@@ -86,7 +86,7 @@ describe('AddBook', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        expect(screen.getByText('Book Year should not be empty, should not be negative or zero and should have 4 digits.')).toBeInTheDocument();
     });
 
     test('Test error if input year is negative', async () => {
@@ -109,7 +109,7 @@ describe('AddBook', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        expect(screen.getByText('Book Year should not be empty, should not be negative or zero and should have 4 digits.')).toBeInTheDocument();
     });
 
     test('Test error if input year does not have 4 digits', async () => {
@@ -132,7 +132,7 @@ describe('AddBook', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        expect(screen.getByText('Book Year should not be empty, should not be negative or zero and should have 4 digits.')).toBeInTheDocument();
     });
 
     test('Test error if text-based input is null', async () => {
@@ -155,7 +155,7 @@ describe('AddBook', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        expect(screen.getByText('Book Title should not be empty and should not have more than 45 characters')).toBeInTheDocument();
     });
 
     test('Test error if text-based input is exceeds limit', async () => {
@@ -178,6 +178,6 @@ describe('AddBook', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Publisher cannot be more than 45 characters long!')).toBeInTheDocument();
+        expect(screen.getByText('Book Publisher should not be empty and should not have more than 45 characters')).toBeInTheDocument();
     });
 });

@@ -81,6 +81,6 @@ describe('UpdateBook component', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('AuthorId cannot be more than 45 characters long!')).toBeInTheDocument();
+        expect(screen.getByText('Book Author Id should not be empty and should not have more than 45 characters')).toBeInTheDocument();
     });
 });

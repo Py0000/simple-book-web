@@ -127,6 +127,7 @@ In `AddBook.jsx` / `AddAuthor.jsx` and `UpdateBook.jsx` / `UpdateAuthor.jsx`:
 Re-Usable Components
 * `Card`, `ViewButton`, `BackButton`, `FormButton`, `Modal` were also used in this application. This helps to prevent duplication of code and adhere to dry. 
 * 'Inheritance' was also used, for instance, `ViewButton`, `BackButton`, `FormButton` uses the `Button` component to avoid repetition of code for rendering the button element and applying the CSS classes. This approach makes it easier to maintain the code, as any changes to the button styling can be made in the Button component itself rather than in each of the button files
+* There is also a `utils` folder than contains functions / variables that is applicable for many of the classes in the application, which helps to reduce duplication and makes the code easier to maintain.
 
 <br>
 

@@ -77,7 +77,7 @@ describe('AddAuthor', () => {
         // Wait for error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        expect(screen.getByText('Author name should not be empty and should not have more than 45 characters')).toBeInTheDocument();
     });
 
     test('Test error if input exceeds length limit', async () => {
@@ -98,6 +98,6 @@ describe('AddAuthor', () => {
         // Wait for error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('Biography cannot be more than 200 characters long!')).toBeInTheDocument();
+        expect(screen.getByText('Author biography should not be empty and should not have more than 200 characters')).toBeInTheDocument();
     }); 
 });

@@ -72,6 +72,6 @@ describe('UpdateAuthor component', () => {
         // Wait for the error modal to appear
         // Should show error message
         await waitFor(() => expect(screen.getByText('Invalid Input')).toBeInTheDocument());
-        expect(screen.getByText('One or more input is empty / invalid!')).toBeInTheDocument();
+        expect(screen.getByText('Author biography should not be empty and should not have more than 200 characters')).toBeInTheDocument();
     });
 });

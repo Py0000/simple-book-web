@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
+import {validateText, validateBiography} from '../../utils/ValidationLogic';
 
 import classes from '../../ui/page_styles/Form.module.css';
 import FormButton from '../../ui/buttons/FormButton';
@@ -45,29 +46,21 @@ const UpdateAuthor = () => {
         try {
             try {
                 // Simple Input validation
-                if (!isValidInput()) {
+                if (!validateText(author.name)) {
                     setError({
                         title: "Invalid Input",
-                        message: "One or more input is empty / invalid!"
+                        message: "Author name should not be empty and should not have more than 45 characters"
                     });
                     return;
-                } 
+                }
 
-                if (isTooLong(author.name, 45)) {
+                if (!validateBiography(author.biography)) {
                     setError({
                         title: "Invalid Input",
-                        message: "Name cannot be more than 45 characters long!"
+                        message: "Author biography should not be empty and should not have more than 200 characters"
                     });
                     return;
-                } 
-
-                if (isTooLong(author.biography, 200)) {
-                    setError({
-                        title: "Invalid Input",
-                        message: "Biography cannot be more than 200 characters long!"
-                    });
-                    return;
-                } 
+                }
                 
                 const path = "http://localhost:9000/authors/";
                 await axios.put(path + id, author);
