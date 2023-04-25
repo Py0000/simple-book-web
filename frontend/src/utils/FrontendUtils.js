@@ -5,6 +5,8 @@ export const PATH_DELIMITER = "/";
 // Links 
 export const VIEW_AUTHOR_LINK = "/view_authors";
 export const ADD_BOOK_LINK = "/addbook";
+export const ADD_AUTHOR_LINK = "/add_author";
+export const UPDATE_AUTHOR_LINK = "/update_author";
 
 // Forms placeholders
 export const PLACEHOLDER_NAME = 'Enter name here';
@@ -19,6 +21,13 @@ export const ERROR_AUTHOR_BIO = "Author biography should not be empty and should
 // Related to status update modal
 export const STATUS_MODAL_TITLE = "Status Update";
 export const ERROR_MSG = "Unexpected Error Occurred. \n";
+
+// Related to View Author Page
+export const VIEW_AUTHOR_PAGE_TITLE = "Authors in Simple CRUD Book Application";
+export const ADD_AUTHOR_BUTTON_VIEW = "Add Authors";
+export const VIEW_ALL_BOOKS_BUTTON = "View All Books";
+export const UPDATE_AUTHOR_BUTTON_VIEW = "Update";
+export const DELETE_AUTHOR_BUTTON_VIEW = "Delete";
 
 // Related to Add Author page
 export const ADD_AUTHOR_PAGE_TTTLE = "Add New Author";

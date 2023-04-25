@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import ViewAuthors from '../commands/authors/ViewAuthors';
+import * as frontendConstant from "../utils/FrontendUtils";
 
 jest.mock('axios');
 
@@ -24,9 +25,9 @@ describe('ViewAuthor', () => {
             </BrowserRouter>
         );
 
-        expect(screen.getByText('Authors in Simple CRUD Book Application')).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: 'Add Authors' })).toHaveAttribute('href', '/add_author');
-        expect(screen.getByRole('link', { name: 'View All Books' })).toHaveAttribute('href', '/');
+        expect(screen.getByText(frontendConstant.VIEW_AUTHOR_PAGE_TITLE)).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: frontendConstant.ADD_AUTHOR_BUTTON_VIEW })).toHaveAttribute('href', frontendConstant.ADD_AUTHOR_LINK);
+        expect(screen.getByRole('link', { name: frontendConstant.VIEW_ALL_BOOKS_BUTTON })).toHaveAttribute('href', frontendConstant.PATH_DELIMITER);
     });
 
     test('Test render a list of authors', async () => {
