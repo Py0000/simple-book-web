@@ -5,6 +5,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import UpdateAuthor from '../commands/authors/UpdateAuthor';
 import * as frontendConstant from "../utils/AuthorUtils";
+import { TEST_TEXT_200, TEST_TEXT_45 } from './TestUtils/TestUtils';
 
 jest.mock('axios');
 
@@ -43,8 +44,8 @@ describe('UpdateAuthor component', () => {
 
         await act(async () => {
             // Set input values via the elements on the component
-            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Updated Name' } });
-            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: 'Test Updated Biography' } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: TEST_TEXT_45 } });
+            fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: TEST_TEXT_200 } });
             
             // Click update author button on the component
             fireEvent.click(getByText(frontendConstant.UPDATE_AUTHOR_BUTTON));
@@ -52,8 +53,8 @@ describe('UpdateAuthor component', () => {
 
         const path = frontendConstant.AUTHOR_PATH + frontendConstant.PATH_DELIMITER + `undefined`;
         expect(axios.put).toHaveBeenCalledWith(path , {
-            name: 'Test Updated Name',
-            biography: 'Test Updated Biography',
+            name: TEST_TEXT_45,
+            biography: TEST_TEXT_200,
         });
     });
 
@@ -65,7 +66,7 @@ describe('UpdateAuthor component', () => {
         );
 
         // Set input values via the elements on the component
-        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: 'Test Updated Name' } });
+        fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_NAME), { target: { value: TEST_TEXT_45 } });
         fireEvent.change(getByPlaceholderText(frontendConstant.PLACEHOLDER_BIO), { target: { value: '' } });
             
 

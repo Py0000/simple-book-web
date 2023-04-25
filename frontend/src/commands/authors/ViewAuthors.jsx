@@ -52,7 +52,6 @@ const ViewAuthors = () => {
             <Card className='item-view'>
                 {authors.map(author => (
                     <div className='item-item' key={author.id}>
-                        <div className='item-item__id'>{author.id}</div>
                         <div className="item-item__description">
                             <h1>{author.name}</h1>
                             <p>{author.biography}</p>
